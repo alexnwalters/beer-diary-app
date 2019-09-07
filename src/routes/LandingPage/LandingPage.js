@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class LandingPage extends Component { 
     render() {
@@ -10,11 +11,13 @@ class LandingPage extends Component {
                 </div>
                 <div>
                     <h2>Join the Community</h2>
-                    <p>Share your reviews with the world. Reads reviews of other beer connoisseur to assist you with your next adventure.</p>
+                    <p>Share your reviews with the world. Read reviews of other beer connoisseurs to assist you with your next drink experience.</p>
                 </div>
                 <div>
                     <h2>Start Your Diary</h2>
-                    <input type="button" value="Sign Up"/>
+                    <Link to='/signup'>
+                        <button>Sign Up</button>
+                    </Link>
                 </div>
             </div>
         )

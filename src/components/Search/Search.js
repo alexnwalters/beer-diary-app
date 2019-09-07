@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import './Search.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
     render() {
         return(
             <div>
                 <form className='search'>
-                    <label hmtlFor='beer_search'>Search Beers:
+                    <label htmlFor='beer_search'>Search Beers:
                         <input
                             type='text'
                             name='beer_search'
                             placeholder='Snake Dog Ipa'
                         />
                     </label>
-                    <input type='submit'/>                   
+                    <Link to='/search'><input type='submit'/></Link> {/*Review use of submit*/}                 
                 </form>
             </div>
         )
