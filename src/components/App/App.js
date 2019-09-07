@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
@@ -9,6 +9,7 @@ import LoginPage from '../../routes/LoginPage/LoginPage'
 import ResultsPage from '../../routes/ResultsPage/ResultsPage';
 import BeerInfoPage from '../../routes/BeerInfoPage/BeerInfoPage';
 import DiaryPage from '../../routes/DairyPage/DiaryPage';
+import ReviewInputPage from '../../routes/ReviewInputPage/ReviewInputPage'
 
 class App extends Component {
   render() {
@@ -21,31 +22,37 @@ class App extends Component {
           <Search />
         </section>
         <main className='App-main'>
-          <Route
-            exact
-            path={'/'}
-            component={LandingPage}>
-          </Route>
-          <Route
-            path={'/signup'}
-            component={SignUpPage}>     
-          </Route>
-          <Route
-            path={'/login'}
-            component={LoginPage}>
-          </Route>
-          <Route
-            path={'/search'}
-            component={ResultsPage}>
-          </Route>
-          <Route
-            path={'/beer/:beerId'}
-            component={BeerInfoPage}>
-          </Route>
-          <Route
-            path={'/diary'}
-            component={DiaryPage}>
-          </Route>
+          <Switch>
+            <Route
+              exact
+              path={'/'}
+              component={LandingPage}>
+            </Route>
+            <Route
+              path={'/signup'}
+              component={SignUpPage}>     
+            </Route>
+            <Route
+              path={'/login'}
+              component={LoginPage}>
+            </Route>
+            <Route
+              path={'/search'}
+              component={ResultsPage}>
+            </Route>
+            <Route
+              path={'/beer/:beerId'}
+              component={BeerInfoPage}>
+            </Route>
+            <Route
+              path={'/diary'}
+              component={DiaryPage}>
+            </Route>
+            <Route
+              path={'/review/:reviewId'}
+              component={ReviewInputPage}>
+            </Route>
+          </Switch>  
         </main>
       </div>
     );

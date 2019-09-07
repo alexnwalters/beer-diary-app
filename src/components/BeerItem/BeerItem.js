@@ -13,7 +13,7 @@ export default function BeerItem(props) {
                 <li>IPU: {props.ipu}</li>
             </ul>
             <p>{props.description}</p>
-            <Link to={`/beer/${props.id}/review`}>
+            <Link to={`/review/${props.id}`}>
                 <button>Review</button>
             </Link>
         </div>
