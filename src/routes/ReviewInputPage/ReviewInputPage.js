@@ -1,25 +1,35 @@
 import React, { Component } from 'react'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 import BeerItem from '../../components/BeerItem/BeerItem'
-import STORE from '../../utils/STORE'
+import BeerResultsContext from '../../contexts/BeerResultsContext'
 
  class ReviewInputPage extends Component {
 
-     state = STORE
+    static contextType = BeerResultsContext
 
-     render() {
+    renderBeerInfo() {
         const reviewId = this.props.match.params.reviewId
-        const beer = this.state.beers.filter(beer => beer.id === reviewId)
+        const beer = this.context.beerResults.filter(beer => beer.id == reviewId)
+        
+        return beer.map(beer => 
+            <BeerItem
+                key={beer.id}
+                {...beer}
+            />
+        )
+    }
 
-         return (
+    render() {
+        const { error } = this.context
+         
+        return (
             <div>
                 <h2>Provide Your Review:</h2>
-                {beer.map(beer => 
-                    <BeerItem
-                        key={beer.id}
-                        {...beer}
-                    />
-                )}
+                <div>
+                {error
+                    ? <p>error!</p>
+                    : this.renderBeerInfo()}
+                </div>
                 <ReviewForm />
             </div>
         )

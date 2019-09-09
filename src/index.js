@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'; 
 import App from './components/App/App';
 import './index.css';
+import { BeerResultsProvider } from './contexts/BeerResultsContext';
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <BeerResultsProvider>
+            <App />
+        </BeerResultsProvider>
     </BrowserRouter>,
-     document.getElementById('root'));
+    document.getElementById('root'));

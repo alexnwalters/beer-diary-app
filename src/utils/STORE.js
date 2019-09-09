@@ -82,5 +82,15 @@ export default {
             "drinkability": 2,
             "notes": "Unde vitae itaque in dolorem error impedit quia modi, ratione laboriosam hic quis asperiores quae, quos excepturi laborum molestiae reiciendis, earum dolores iusto pariatur deserunt velit. Soluta nulla eveniet quisquam."
         },
+        {
+            "id": "5",
+            "beerId": "bpJ9u8",
+            "overall": 4,
+            "color": 1,
+            "aroma": "Fruity",
+            "taste": "Hop",
+            "drinkability": 4,
+            "notes": "Classic bitter IPA, flavor profile is a nice introduction to an IPA.  However, be prepared it is anything but light."
+        },
     ],
 }

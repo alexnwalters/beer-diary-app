@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import BeerResultsContext from '../../contexts/BeerResultsContext';
 import BreweryDbApiService from '../../services/BreweryApiService';
-import config from '../../config';
 
 class Search extends Component {
+
+    static contextType = BeerResultsContext
 
     handleSubmit = e => {
         e.preventDefault()
 
+        this.context.clearBeerResults()
+        this.context.clearError()
+
         const query = e.target.query.value
-
-        console.log(query)
+        this.context.setQuery(query)
         
-        // BreweryDbApiService.getBeers(query)
-        //     .then(res => {
-        //         console.log(res)
-        //     })
+        BreweryDbApiService.getBeers(this.context.query)
+            .then(this.context.setBeerResults)
+            .then(this.context.clearQuery)
+            .catch(this.context.setError)
 
-        fetch(`${config.BREWERY_ENDPOINT}/search?q=${query}&type=beer&withBreweries=y`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `${config.BREWERY_KEY}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-        })
-        .then(res => {
-            console.log(res)
-        })
+        this.props.history.push('/search')
     }
 
     render() {
@@ -38,14 +33,15 @@ class Search extends Component {
                             type='text'
                             name='query'
                             placeholder='Snake Dog Ipa'
+                            required
                         />
                     </label>
-                    {/* <Link to='/search'><input type='submit'/></Link> Review use of submit */}
-                    <input type='submit'/>                 
+                    {/* <Link to='/search'><input type='submit'/></Link> */}
+                    <input type='submit'/>
                 </form>
             </div>
         )
     }
 }
 
-export default Search
+export default withRouter(Search)
