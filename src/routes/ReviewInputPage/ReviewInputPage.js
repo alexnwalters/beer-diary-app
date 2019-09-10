@@ -1,25 +1,29 @@
 import React, { Component } from 'react'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 import BeerItem from '../../components/BeerItem/BeerItem'
-import BeerResultsContext from '../../contexts/BeerResultsContext'
+import BeerContext from '../../contexts/BeerContext'
 
  class ReviewInputPage extends Component {
+    static defaultProps = {
+        match: { params: {} },
+    }
 
-    static contextType = BeerResultsContext
+    static contextType = BeerContext
 
     renderBeerInfo() {
-        const reviewId = this.props.match.params.reviewId
-        const beer = this.context.beerResults.filter(beer => beer.id == reviewId)
+        const selectedBeer = this.props.match.params.beerId
+        const beerInfo = this.context.beerResults.filter(beer => beer.id == selectedBeer)
         
-        return beer.map(beer => 
+        return beerInfo.map(beer => 
             <BeerItem
                 key={beer.id}
                 {...beer}
             />
         )
     }
-
+    
     render() {
+        
         const { error } = this.context
          
         return (
@@ -31,6 +35,7 @@ import BeerResultsContext from '../../contexts/BeerResultsContext'
                     : this.renderBeerInfo()}
                 </div>
                 <ReviewForm />
+                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import BeerResultsContext from '../../contexts/BeerResultsContext';
+import BeerContext from '../../contexts/BeerContext';
 import BreweryDbApiService from '../../services/BreweryApiService';
 
 class Search extends Component {
 
-    static contextType = BeerResultsContext
+    static contextType = BeerContext
 
     handleSubmit = e => {
         e.preventDefault()
@@ -18,10 +18,11 @@ class Search extends Component {
         
         BreweryDbApiService.getBeers(this.context.query)
             .then(this.context.setBeerResults)
+            .then(this.props.history.push('/search'))
             .then(this.context.clearQuery)
             .catch(this.context.setError)
 
-        this.props.history.push('/search')
+        // this.props.history.push('/search')
     }
 
     render() {

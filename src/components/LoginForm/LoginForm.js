@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
  
 class LoginForm extends Component {
     render() {
@@ -18,7 +17,6 @@ class LoginForm extends Component {
                         <input type='submit'/>
                     </fieldset>
                 </form>
-                <Link to='/'><button>Back</button></Link> {/* change later to use history */}
             </div>
         )
     }

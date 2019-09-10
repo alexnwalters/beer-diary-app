@@ -31,7 +31,6 @@ class SignUpForm extends Component {
                         <input type='submit'/>
                     </fieldset>
                 </form>
-                <Link to='/'><button>Back</button></Link> {/* change later to use history */}
             </div>
         )
     }

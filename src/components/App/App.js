@@ -49,7 +49,7 @@ class App extends Component {
               component={DiaryPage}>
             </Route>
             <Route
-              path={'/review/:reviewId'}
+              path={'/review/:beerId'}
               component={ReviewInputPage}>
             </Route>
           </Switch>  

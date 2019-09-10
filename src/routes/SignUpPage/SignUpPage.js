@@ -6,10 +6,8 @@ class SignUpPage extends Component {
         return (
             <div>
                 <h2>User Sign Up</h2>
-
-                <div>
-                    <SignUpForm></SignUpForm>
-                </div>
+                <SignUpForm /> 
+                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

@@ -7,6 +7,7 @@ class LoginPage extends Component {
             <div className='LoginPage'>
                 <h2>Log In</h2>
                 <LoginForm />
+                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

@@ -1,14 +1,51 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import BeerContext from '../../contexts/BeerContext'
 
  class ReviewForm extends Component{
+    static defaultProps = {
+        match: { params: {} },
+    }
+
+    static contextType = BeerContext
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const selectedBeer = this.props.match.params.beerId
+        const beerReviewed = this.context.beerResults.find(beer => beer.id == selectedBeer)
+
+        const { overall, color, aroma, taste, drinkability, notes } = e.target
+        const userReview = {
+            beerId: beerReviewed.id,
+            overall: overall.value,
+            color: color.value,
+            aroma: aroma.value,
+            taste: taste.value,
+            drinkability: drinkability.value,
+            notes: notes.value
+        }
+        const beer = {
+            id: beerReviewed.id,
+            name: beerReviewed.name,
+            brewery: beerReviewed.breweries[0].name,
+            abv: beerReviewed.abv || beerReviewed.style.abvMax,
+            ibu: beerReviewed.ibu || beerReviewed.style.ibuMax,
+            description: beerReviewed.description || 'No Description Provided',
+        }
+
+        this.context.addBeer(beer)
+        this.context.addUserReview(userReview)
+
+        this.props.history.push('/diary')
+    }
+
     render() {
         return (
-            <div className='ReviewForm'>
-                <form>
+            <div>
+                <form className='ReviewForm' onSubmit={this.handleSubmit}> 
                     <fieldset>
-                        <label htmlFor='overall-review'>Overall(1 to 5):
-                            <input type='range' name='overall-review' min='1' max='5' step='1' list='overall-list' />
+                        <label htmlFor='overall'>Overall(1 to 5):
+                            <input type='range' name='overall' min='1' max='5' step='1' list='overall-list' />
                             <datalist id='overall-list'>
                                 <option>1</option>
                                 <option>2</option>
@@ -18,19 +55,19 @@ import { Link } from 'react-router-dom'
                             </datalist>
                         </label>
 
-                         <label htmlFor='color-review'>Color(Light to Dark):
-                            <input type='range' name='color-review' min='1' max='5' step='1' list='color-list' />
+                         <label htmlFor='color'>Color(Light to Dark):
+                            <input type='range' name='color' min='1' max='5' step='1' list='color-list' />
                             <datalist id='color-list'>
-                                <option>Light</option>
+                                <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
-                                <option>Dark</option>
+                                <option>5</option>
                             </datalist>
                         </label>
 
-                         <label htmlFor='aroma-review'>Aroma (Most Domanant Fragrance):
-                            <select name='aroma-review'>
+                         <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):
+                            <select name='aroma'>
                                 <option value='undecided'>Undecided</option>
                                 <option>Bready</option>
                                 <option>Nutty</option>
@@ -43,8 +80,8 @@ import { Link } from 'react-router-dom'
                             </select>
                         </label>
 
-                         <label htmlFor='taste-review'>Taste (Most Domanant Flavor Palate):
-                            <select name='taste-review'>
+                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):
+                            <select name='taste'>
                                 <option value='undecided'>Undecided</option>
                                 <option>Crisp</option>
                                 <option>Hop</option>
@@ -56,8 +93,8 @@ import { Link } from 'react-router-dom'
                             </select>
                         </label>
 
-                         <label htmlFor='drinkablity-review'>Drinkability('One and Done' to 'Keep'em Coming'):
-                            <input type='range' name='drinkablity-review' min='1' max='5' step='1' list='drinkability-list' />
+                         <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):
+                            <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list' />
                             <datalist id='drinkability-list'>
                                 <option>1</option>
                                 <option>2</option>
@@ -66,15 +103,14 @@ import { Link } from 'react-router-dom'
                                 <option>5</option>
                             </datalist>
                         </label>
-                         <label htmlFor='notes-review'>Notes:
-                                <textarea  name='drinkablity-review' rows='10' cols='30'></textarea>
+                         <label htmlFor='notes'>Notes:
+                                <textarea  name='notes' rows='10' cols='30'></textarea>
                         </label>                
                         <input type='submit'/>
                     </fieldset>
                 </form>
-                <Link to='/'><button>Back</button></Link> {/* change later to use history */}
             </div>
         )
     }
 }
- export default ReviewForm
+ export default withRouter(ReviewForm)

@@ -1,36 +1,65 @@
 import React, { Component } from 'react';
 import BeerItem from '../../components/BeerItem/BeerItem'
-import STORE from '../../utils/STORE'
 import UserReview from '../../components/UserReview/UserReview';
-import BeerResultsContext from '../../contexts/BeerResultsContext'
+import BeerContext from '../../contexts/BeerContext'
+import ReviewButton from '../../components/ReviewButton/ReviewButton'
 
 class BeerInfoPage extends Component {
+    static defaultProps = {
+        match: { params: {} },
+    }
 
-    static contextType = BeerResultsContext
-    state = STORE
+    static contextType = BeerContext
 
     renderBeerInfo() {
-        const beerId = this.props.match.params.beerId
-        const beer = this.context.beerResults.filter(beer => beer.id === beerId)
-        return beer.map(beer => 
-            <BeerItem
-                key={beer.id}
-                {...beer}
-            />
-        )
+        const selectedBeerId = this.props.match.params.beerId
+        const beerInfoFromResults = this.context.beerResults.filter(beer => beer.id === selectedBeerId)
+        const beerInfoFromReview = this.context.beers.filter(beer => beer.id === selectedBeerId)
+        const userReviews = this.context.userReviews
+
+        if(beerInfoFromResults.length) {
+            return beerInfoFromResults.map(beer => {
+                const review = userReviews.filter(review => review.beerId == beer.id)
+
+                if(review.length) {
+                    return (
+                        <div>
+                            <BeerItem key={beer.id} {...beer}/>
+                            <UserReview key={review.id} {...review}/>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div>
+                            <BeerItem key={beer.id} {...beer}/>
+                            <ReviewButton key={beer.id} {...beer}/>
+                        </div>
+                    )
+                }
+            })
+        } else {
+            return beerInfoFromReview.map(beer => {
+                const review = userReviews.filter(review => review.beerId == beer.id)
+                
+                if(review.length) {
+                    return (
+                        <div>
+                            <BeerItem key={beer.id} {...beer}/>
+                            <UserReview key={review.id} {...review}/>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div>
+                            <BeerItem key={beer.id} {...beer}/>
+                            <ReviewButton key={beer.id} {...beer}/>
+                        </div>
+                    )
+                }
+            })
+        }
     }
 
-    renderUserReview() {
-        const beerId = this.props.match.params.beerId
-        const review = this.state.userReviews.filter(review => review.beerId == beerId)
-        return review.map(review => 
-            <UserReview
-                key={review.id}
-                {...review}
-            />
-        )
-    }
-    
     render() {
         const { error } = this.context
 
@@ -39,12 +68,10 @@ class BeerInfoPage extends Component {
                 {error
                     ? <p>error!</p>
                     : this.renderBeerInfo()}
-                {error
-                    ? <p>error!</p>
-                    : this.renderUserReview()}               
             </div>
         )
     }
 }
 
 export default BeerInfoPage
+

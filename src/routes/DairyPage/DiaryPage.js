@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import UserReview from '../../components/UserReview/UserReview'
 import BeerItem from '../../components/BeerItem/BeerItem'
 import STORE from '../../utils/STORE'
+import BeerContext from '../../contexts/BeerContext'
 
 class DiaryPage extends Component {
 
-    state = STORE
-    
+    static contextType = BeerContext
+   
     render() {
 
-        const reviews = this.state.userReviews
-        const beers = this.state.beers
+        const reviews = this.context.userReviews
+        const beers = this.context.beers
 
         return (
             <div>
                 <h2>Beer Diary</h2>
                 {reviews.map(review => {
-                        const beer = beers.filter(beer => beer.id === review.beerId)
+                        const beer = beers.filter(beer => beer.id == review.beerId)
                         return (
                             <div>
                                 {beer.map(beer => 

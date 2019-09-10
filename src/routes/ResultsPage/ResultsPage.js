@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import BeerItem from '../../components/BeerItem/BeerItem';
-import BeerResultsContext from '../../contexts/BeerResultsContext'
+import BeerContext from '../../contexts/BeerContext'
+import ReviewButton from '../../components/ReviewButton/ReviewButton';
 
 class ResultsPage extends Component {
 
-    static contextType = BeerResultsContext
+    static contextType = BeerContext
 
     renderBeers() {
-        const { beerResults = [] } = this.context
-        return beerResults.map(beer =>
-            <BeerItem
-            key={beer.id}
-            {...beer}
-            />)
+        const { beerResults, userReviews } = this.context
+
+        return beerResults.map(beer => {
+            const review = userReviews.filter(review => review.beerId == beer.id)
+            
+            if(review.length) {
+                return (
+                    <div>
+                        <BeerItem key={beer.id} {...beer}/>
+                        <p>Already Reviewed (will be update button)</p>
+                    </div>
+                )
+            } else {
+                return (
+                    <div>
+                        <BeerItem key={beer.id} {...beer}/>
+                        <ReviewButton key={beer.id} {...beer}/>
+                    </div>
+                )
+            }
+        })
     }
 
     render() {
-
         const { error } = this.context
         
         return(
@@ -24,7 +39,7 @@ class ResultsPage extends Component {
                 <h2>Search Results:</h2>
                 <ul>
                     {error
-                        ? <p>error!</p>
+                        ? <p>No results returned, please try again.</p>
                         : this.renderBeers()}
                 </ul>
             </div>

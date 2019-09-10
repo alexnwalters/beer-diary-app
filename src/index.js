@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'; 
 import App from './components/App/App';
 import './index.css';
-import { BeerResultsProvider } from './contexts/BeerResultsContext';
+import { BeerProvider } from './contexts/BeerContext';
 
 ReactDOM.render(
     <BrowserRouter>
-        <BeerResultsProvider>
+        <BeerProvider>
             <App />
-        </BeerResultsProvider>
+        </BeerProvider>
     </BrowserRouter>,
     document.getElementById('root'));

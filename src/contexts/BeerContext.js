@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 
-const BeerResultsContext = React.createContext({
+const BeerContext = React.createContext({
     query: [],
     beerResults: [],
+    beers: [],
+    userReviews: [],
     error: null,
     setQuery: () => {},
     clearQuery: () => {},
@@ -10,14 +12,17 @@ const BeerResultsContext = React.createContext({
     clearBeerResults: () => {},
     setError: () => {},
     clearError: () => {},
+    addBeer: () => {},
 })
 
-export default BeerResultsContext
+export default BeerContext
 
-export class BeerResultsProvider extends Component {
+export class BeerProvider extends Component {
     state = {
         query: [],
         beerResults: [],
+        beers: [],
+        userReviews: [],
         error: null
     };
 
@@ -46,6 +51,18 @@ export class BeerResultsProvider extends Component {
         this.setState({ error: null })
     }
 
+    addBeer = beer => {
+        this.setState({
+            beers: [ ...this.state.beers, beer ],
+        })        
+    }
+
+    addUserReview = userReview => {
+        this.setState({
+            userReviews: [ ...this.state.userReviews, userReview ],
+        })        
+    }
+
     render() {
         const value = {
             query: this.state.query,
@@ -57,11 +74,15 @@ export class BeerResultsProvider extends Component {
             error: this.state.error,
             setError: this.setError,
             clearError: this.clearError,
+            beers: this.state.beers,
+            userReviews: this.state.userReviews,
+            addBeer: this.addBeer,
+            addUserReview: this.addUserReview,
         }
         return (
-            <BeerResultsContext.Provider value={value}>
+            <BeerContext.Provider value={value}>
                 {this.props.children}
-            </BeerResultsContext.Provider>
+            </BeerContext.Provider>
         )
     }
 }
