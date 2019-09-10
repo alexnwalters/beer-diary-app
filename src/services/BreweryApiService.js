@@ -10,9 +10,11 @@ const BreweryDbApiService = {
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             )
-            .then(res => {
-                return res.data
-            })
+            .then(res => 
+                (!res.data)
+                    ? console.log('No Results Return')
+                    : res.data
+            )
     },
 }
 

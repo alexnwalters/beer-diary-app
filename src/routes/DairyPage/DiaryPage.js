@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import UserReview from '../../components/UserReview/UserReview'
 import BeerItem from '../../components/BeerItem/BeerItem'
-import STORE from '../../utils/STORE'
 import BeerContext from '../../contexts/BeerContext'
 
 class DiaryPage extends Component {
@@ -18,6 +17,7 @@ class DiaryPage extends Component {
                 <h2>Beer Diary</h2>
                 {reviews.map(review => {
                         const beer = beers.filter(beer => beer.id == review.beerId)
+                        console.log(review)
                         return (
                             <div>
                                 {beer.map(beer => 
@@ -26,7 +26,7 @@ class DiaryPage extends Component {
                                         {...beer}
                                     />
                                 )}
-
+                                
                                 <UserReview
                                     key={review.id}
                                     {...review}

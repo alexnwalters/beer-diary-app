@@ -13,6 +13,9 @@ const BeerContext = React.createContext({
     setError: () => {},
     clearError: () => {},
     addBeer: () => {},
+    addUserReview: () => {},
+    deleteUserReview: () => {},
+    updateUserReview: () => {},
 })
 
 export default BeerContext
@@ -60,7 +63,24 @@ export class BeerProvider extends Component {
     addUserReview = userReview => {
         this.setState({
             userReviews: [ ...this.state.userReviews, userReview ],
-        })        
+        })
+    }
+
+    deleteUserReview = userReviewId => {
+        const newUserReviews = this.state.userReviews.filter(userReview =>
+            userReview.beerId !== userReviewId
+        )
+        this.setState({
+            userReviews: newUserReviews
+        })
+    }
+
+    updateUserReview = newReview => {
+        this.setState({
+            userReviews: this.state.userReviews.map(review =>
+                (review.beerId !== newReview.beerId) ? review : newReview
+            )
+        })
     }
 
     render() {
@@ -78,6 +98,8 @@ export class BeerProvider extends Component {
             userReviews: this.state.userReviews,
             addBeer: this.addBeer,
             addUserReview: this.addUserReview,
+            deleteUserReview: this.deleteUserReview,
+            updateUserReview: this.updateUserReview,
         }
         return (
             <BeerContext.Provider value={value}>

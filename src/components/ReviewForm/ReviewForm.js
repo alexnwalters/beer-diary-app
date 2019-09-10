@@ -40,67 +40,45 @@ import BeerContext from '../../contexts/BeerContext'
     }
 
     render() {
+        const aromas = [{name: 'Bready'}, {name: 'Nutty'}, {name: 'Toasty'}, {name: 'Roasted'}, {name: 'Floral'}, {name: 'Fruity'}, {name: 'Piney'}, {name: 'Spicy'}]
+        const tastes = [{name: 'Crisp'}, {name: 'Hop'}, {name: 'Malt'}, {name: 'Roast'}, {name: 'Smoke'}, {name: 'Fruit & Spice'}, {name: 'Tart & Funky'}]
+        const numbers = [{value: 1}, {value: 2}, {value: 3}, {value: 4}, {value: 5}]
         return (
             <div>
                 <form className='ReviewForm' onSubmit={this.handleSubmit}> 
                     <fieldset>
                         <label htmlFor='overall'>Overall(1 to 5):
-                            <input type='range' name='overall' min='1' max='5' step='1' list='overall-list' />
+                            <input type='range' name='overall' min='1' max='5' step='1' list='overall-list'/>
                             <datalist id='overall-list'>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
                         </label>
 
                          <label htmlFor='color'>Color(Light to Dark):
-                            <input type='range' name='color' min='1' max='5' step='1' list='color-list' />
+                            <input type='range' name='color' min='1' max='5' step='1' list='color-list'/>
                             <datalist id='color-list'>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
                         </label>
 
                          <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):
-                            <select name='aroma'>
-                                <option value='undecided'>Undecided</option>
-                                <option>Bready</option>
-                                <option>Nutty</option>
-                                <option>Toasty</option>
-                                <option>Roasted</option>
-                                <option>Floral</option>
-                                <option>Fruity</option>
-                                <option>Piney</option>
-                                <option>Spicy</option>
+                            <select name='aroma' required>
+                                <option disabled='' value=''>...</option>
+                                {aromas.map(aroma => <option value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         </label>
 
                          <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):
-                            <select name='taste'>
-                                <option value='undecided'>Undecided</option>
-                                <option>Crisp</option>
-                                <option>Hop</option>
-                                <option>Malt</option>
-                                <option>Roast</option>
-                                <option>Smoke</option>
-                                <option>Fruit & Spice</option>
-                                <option>Tart & Funky</option>
+                            <select name='taste' required>
+                                <option disabled='' value=''>...</option>
+                                {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
                             </select>
                         </label>
 
                          <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):
-                            <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list' />
+                            <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list'/>
                             <datalist id='drinkability-list'>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
                         </label>
                          <label htmlFor='notes'>Notes:

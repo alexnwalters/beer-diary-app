@@ -17,7 +17,7 @@ class ResultsPage extends Component {
                 return (
                     <div>
                         <BeerItem key={beer.id} {...beer}/>
-                        <p>Already Reviewed (will be update button)</p>
+                        <p>Already Reviewed</p>
                     </div>
                 )
             } else {

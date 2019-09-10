@@ -19,9 +19,8 @@ class BeerInfoPage extends Component {
 
         if(beerInfoFromResults.length) {
             return beerInfoFromResults.map(beer => {
-                const review = userReviews.filter(review => review.beerId == beer.id)
-
-                if(review.length) {
+                const review = userReviews.find(review => review.beerId == beer.id)
+                if(review) {
                     return (
                         <div>
                             <BeerItem key={beer.id} {...beer}/>
@@ -39,9 +38,9 @@ class BeerInfoPage extends Component {
             })
         } else {
             return beerInfoFromReview.map(beer => {
-                const review = userReviews.filter(review => review.beerId == beer.id)
-                
-                if(review.length) {
+                const review = userReviews.find(review => review.beerId == beer.id) 
+                if(review) {
+                    
                     return (
                         <div>
                             <BeerItem key={beer.id} {...beer}/>

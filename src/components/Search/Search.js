@@ -21,8 +21,6 @@ class Search extends Component {
             .then(this.props.history.push('/search'))
             .then(this.context.clearQuery)
             .catch(this.context.setError)
-
-        // this.props.history.push('/search')
     }
 
     render() {
@@ -37,7 +35,6 @@ class Search extends Component {
                             required
                         />
                     </label>
-                    {/* <Link to='/search'><input type='submit'/></Link> */}
                     <input type='submit'/>
                 </form>
             </div>
