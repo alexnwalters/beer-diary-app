@@ -8,7 +8,7 @@ export default function BeerItem(props) {
             <Link to={`/beer/${props.id}`}>
                 <h3>{props.name}</h3>
             </Link>
-            <p>{props.brewery || props.breweries[0].name}</p>
+            <p>{props.brewery || props.breweries[0].name || 'N/A'}</p>
             <ul>
                 <li>ABV: {props.abv || 'N/A'}</li>
                 <li>IBU: {props.ibu || 'N/A'}</li>
@@ -18,4 +18,7 @@ export default function BeerItem(props) {
     )
 }
 
-// add default props
+//this doesnt fix the problem?
+BeerItem.defaultProps = {
+    breweries: {}
+}

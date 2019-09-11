@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom'
 import BeerContext from '../../contexts/BeerContext'
 import './UpdateReviewForm.css'
 
- class UpdateReviewForm extends Component{
+ class UpdateReviewForm extends Component {
     static defaultProps = {
         match: { params: {} },
     }
-
+    
     static contextType = BeerContext
 
     state = {

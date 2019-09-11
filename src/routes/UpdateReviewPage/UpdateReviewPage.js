@@ -6,6 +6,7 @@ import BeerContext from '../../contexts/BeerContext'
  class UpdateReviewPage extends Component {
     static defaultProps = {
         match: { params: {} },
+        history: { goBack: () => {} },
     }
 
     static contextType = BeerContext
@@ -35,7 +36,7 @@ import BeerContext from '../../contexts/BeerContext'
                     : this.renderBeerInfo()}
                 </div>
                 <UpdateReviewForm />
-                <button onClick={this.props.history.goBack}>Back</button>
+                {/* <button onClick={this.props.history.goBack}>Back</button> */}
             </div>
         )
     }
