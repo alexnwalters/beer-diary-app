@@ -15,12 +15,8 @@ class Search extends Component {
 
         const query = e.target.query.value
         this.context.setQuery(query)
-        
-        BreweryDbApiService.getBeers(this.context.query)
-            .then(this.context.setBeerResults)
-            .then(this.props.history.push('/search'))
-            .then(this.context.clearQuery)
-            .catch(this.context.setError)
+
+        this.props.history.push('/search')
     }
 
     render() {
@@ -35,6 +31,7 @@ class Search extends Component {
                             required
                         />
                     </label>
+                    {/* <Link to='/search'><input type='submit'/></Link> */}
                     <input type='submit'/>
                 </form>
             </div>

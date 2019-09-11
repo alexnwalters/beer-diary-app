@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BreweryDbApiService from '../services/BreweryApiService';
 
 const BeerContext = React.createContext({
     query: [],
@@ -29,8 +30,12 @@ export class BeerProvider extends Component {
         error: null
     };
 
-    setQuery = query => {
-        this.setState({ query })
+    setQuery = (query) => {
+        this.setState({ query }, () => {
+            BreweryDbApiService.getBeers(query)
+                .then(this.setBeerResults)
+                .catch(this.setError) 
+        })
     }
 
     clearQuery = (query) => {

@@ -7,6 +7,11 @@ class ResultsPage extends Component {
 
     static contextType = BeerContext
 
+    static defaultProps = {
+        beerResults: [],
+        userReviews: [],
+    }
+    
     renderBeers() {
         const { beerResults, userReviews } = this.context
 

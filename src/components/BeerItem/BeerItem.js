@@ -10,7 +10,7 @@ export default function BeerItem(props) {
             </Link>
             <p>{props.brewery || props.breweries[0].name}</p>
             <ul>
-                <li>ABV: {props.abv || props.style.abvMax + ' (est.)' || 'N/A'}</li>
+                <li>ABV: {props.abv || 'N/A'}</li>
                 <li>IBU: {props.ibu || 'N/A'}</li>
             </ul>
             <p>{props.description || 'No Description Provided'}</p>
