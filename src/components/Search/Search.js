@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import BeerContext from '../../contexts/BeerContext';
-import BreweryDbApiService from '../../services/BreweryApiService';
+import './Search.css'
 
 class Search extends Component {
 
@@ -9,7 +9,6 @@ class Search extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-
         this.context.clearBeerResults()
         this.context.clearError()
 
@@ -21,20 +20,17 @@ class Search extends Component {
 
     render() {
         return(
-            <div>
-                <form className='search' onSubmit={this.handleSubmit}>
-                    <label htmlFor='query'>Search Beers:
-                        <input
-                            type='text'
-                            name='query'
-                            placeholder='Snake Dog Ipa'
-                            required
-                        />
-                    </label>
-                    {/* <Link to='/search'><input type='submit'/></Link> */}
-                    <input type='submit'/>
-                </form>
-            </div>
+            <form className='search' onSubmit={this.handleSubmit}>
+                <label htmlFor='query'>Search Beers:
+                    <input
+                        type='text'
+                        name='query'
+                        placeholder='Snake Dog Ipa'
+                        required
+                    />
+                </label>
+                <input type='submit'/>
+            </form>
         )
     }
 }

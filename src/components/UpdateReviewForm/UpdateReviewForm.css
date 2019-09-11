@@ -1,13 +1,13 @@
-.ReviewForm {
+.UpdateReviewForm {
     margin-bottom: 16px;
 }
 
-.ReviewForm label {
+.UpdateReviewForm label {
     display: flex;
     justify-content: space-between;
 }
 
-.ReviewForm input[type=range], select, textarea {
+.UpdateReviewForm input[type=range], select, textarea {
     margin: 8px 0;
     width: 100%;
 }

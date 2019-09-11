@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import BeerContext from '../../contexts/BeerContext'
+import './ReviewForm.css'
 
  class ReviewForm extends Component{
     static defaultProps = {
@@ -47,43 +48,40 @@ import BeerContext from '../../contexts/BeerContext'
             <div>
                 <form className='ReviewForm' onSubmit={this.handleSubmit}> 
                     <fieldset>
-                        <label htmlFor='overall'>Overall(1 to 5):
+                        <label htmlFor='overall'>Overall(1 to 5):</label>
                             <input type='range' name='overall' min='1' max='5' step='1' list='overall-list'/>
                             <datalist id='overall-list'>
                                 {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
-                        </label>
+                        
 
-                         <label htmlFor='color'>Color(Light to Dark):
+                         <label htmlFor='color'>Color(Light to Dark):</label>
                             <input type='range' name='color' min='1' max='5' step='1' list='color-list'/>
                             <datalist id='color-list'>
                                 {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
-                        </label>
-
-                         <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):
+                        
+                         <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
                             <select name='aroma' required>
                                 <option disabled='' value=''>...</option>
                                 {aromas.map(aroma => <option value={aroma.name}>{aroma.name}</option>)}
                             </select>
-                        </label>
-
-                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):
+                        
+                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
                             <select name='taste' required>
                                 <option disabled='' value=''>...</option>
                                 {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
                             </select>
-                        </label>
-
-                         <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):
+                    
+                         <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):</label>
                             <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list'/>
                             <datalist id='drinkability-list'>
                                 {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
-                        </label>
-                         <label htmlFor='notes'>Notes:
-                                <textarea  name='notes' rows='10' cols='30'></textarea>
-                        </label>                
+                       
+                         <label htmlFor='notes'>Notes:</label>
+                                <textarea  name='notes' rows='4'></textarea>
+                         <br></br>             
                         <input type='submit'/>
                     </fieldset>
                 </form>

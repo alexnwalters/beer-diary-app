@@ -1,0 +1,16 @@
+.SignUpForm {
+    margin-bottom: 16px;
+}
+
+.SignUpForm label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.SignUpForm input {
+    margin: 8px 0;
+}
+
+.SignUpForm input[type=text], input[type=email] {
+    width: 100%;
+}

@@ -1,6 +1,12 @@
 .Header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 0px;
+    background-color: white;
 }
 
 .Header a {

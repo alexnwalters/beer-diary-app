@@ -1,0 +1,16 @@
+.LoginForm {
+    margin-bottom: 16px;
+}
+
+.LoginForm label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.LoginForm input {
+    margin: 8px 0;
+}
+
+.LoginForm input[type=text] {
+    width: 100%;
+}
