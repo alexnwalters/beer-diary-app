@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import BeerItem from '../../components/BeerItem/BeerItem';
 import BeerContext from '../../contexts/BeerContext'
 import ReviewButton from '../../components/ReviewButton/ReviewButton';
@@ -10,25 +11,29 @@ class ResultsPage extends Component {
     renderBeers() {
         const { beerResults, userReviews } = this.context
 
-        return beerResults.map(beer => {
-            const review = userReviews.filter(review => review.beerId == beer.id)
-            
-            if(review.length) {
-                return (
-                    <div>
-                        <BeerItem key={beer.id} {...beer}/>
-                        <p>Already Reviewed</p>
-                    </div>
-                )
-            } else {
-                return (
-                    <div>
-                        <BeerItem key={beer.id} {...beer}/>
-                        <ReviewButton key={beer.id} {...beer}/>
-                    </div>
-                )
-            }
-        })
+        return (
+            <ul>
+                {beerResults.map((beer, i) => {
+                    const review = userReviews.filter(review => review.beerId === beer.id)
+
+                    if(review.length) {
+                        return (
+                            <li>
+                                <BeerItem key={i} {...beer}/>
+                                <p>Already Reviewed</p>
+                            </li>
+                        )
+                    } else {
+                        return (
+                            <li>
+                                <BeerItem key={i} {...beer}/>
+                                <ReviewButton key={beer.id} {...beer}/>
+                            </li>
+                        )
+                    }
+                })}
+            </ul>
+        )
     }
 
     render() {
@@ -37,11 +42,12 @@ class ResultsPage extends Component {
         return(
             <div>
                 <h2>Search Results:</h2>
-                <ul>
-                    {error
-                        ? <p>No results returned, please try again.</p>
-                        : this.renderBeers()}
-                </ul>
+                {error
+                    ? <div>
+                        <p>No results returned, please try again or add a beer instead.</p>
+                        <Link to='/create'><button>Create a Beer</button></Link>
+                    </div>
+                    : this.renderBeers()}
             </div>
         )
     }

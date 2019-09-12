@@ -1,23 +1,18 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import BeerContext from '../../contexts/BeerContext'
-import './ReviewForm.css'
 
- class ReviewForm extends Component{
-    static defaultProps = {
-        match: { params: {} },
-    }
-
+class CreateBeerForm extends Component{
     static contextType = BeerContext
 
     handleSubmit = e => {
         e.preventDefault()
-        const selectedBeer = this.props.match.params.beerId
-        const beerReviewed = this.context.beerResults.find(beer => beer.id === selectedBeer)
 
-        const { overall, color, aroma, taste, drinkability, notes } = e.target
+        const beerId = 'testID1'
+
+        const { name, brewery, abv, ibu, style, overall, color, aroma, taste, drinkability, notes } = e.target
         const userReview = {
-            beerId: beerReviewed.id,
+            beerId: beerId,
             overall: overall.value,
             color: color.value,
             aroma: aroma.value,
@@ -26,14 +21,12 @@ import './ReviewForm.css'
             notes: notes.value
         }
         const beer = {
-            id: beerReviewed.id,
-            name: beerReviewed.name,
-            brewery: beerReviewed.breweries[0].name || '',
-            image: beerReviewed.breweries[0].images.icon || '',
-            abv: beerReviewed.abv || beerReviewed.style.abvMax || '',
-            ibu: beerReviewed.ibu || beerReviewed.style.ibuMax || '',
-            beerStyle: beerReviewed.style.shortName || '',
-            description: beerReviewed.description || '',
+            id: beerId,
+            name: name.value,
+            brewery: brewery.value,
+            abv: abv.value || '',
+            ibu: ibu.value || '',
+            beerStyle: style.value,            
         }
 
         this.context.addBeer(beer)
@@ -48,8 +41,26 @@ import './ReviewForm.css'
         const numbers = [{value: 1}, {value: 2}, {value: 3}, {value: 4}, {value: 5}]
         return (
             <div>
-                <form className='ReviewForm' onSubmit={this.handleSubmit}> 
+                <form className='CreateBeerForm' onSubmit={this.handleSubmit}>
                     <fieldset>
+                        <legend>New Beer Details</legend>
+                        <label htmlFor='name'>Beer Name:</label>
+                            <input type='text' name='name' required />
+                        
+                        <label htmlFor='brewery'>Brewery Name:</label>
+                            <input type='text' name='brewery' required />
+                        
+                        <label htmlFor='abv'>ABV:</label>
+                            <input type='number' name='abv' min='0' max='50'/>
+                        
+                        <label htmlFor='ibu'>IBU:</label>
+                            <input type='number' name='ibu' min='0' max='100'/>
+                        
+                        <label htmlFor='style'>Style:</label>
+                            <input type='text' name='style'/>   
+                    </fieldset> 
+                    <fieldset>
+                        <legend>Beer Review</legend>
                         <label htmlFor='overall'>Overall(1 to 5):</label>
                             <input type='range' name='overall' min='1' max='5' step='1' list='overall-list'/>
                             <datalist id='overall-list'>
@@ -57,33 +68,33 @@ import './ReviewForm.css'
                             </datalist>
                         
 
-                         <label htmlFor='color'>Color(Light to Dark):</label>
+                        <label htmlFor='color'>Color(Light to Dark):</label>
                             <input type='range' name='color' min='1' max='5' step='1' list='color-list'/>
                             <datalist id='color-list'>
                                 {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
                         
-                         <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
+                        <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
                             <select name='aroma' required>
                                 <option disabled='' value=''>...</option>
                                 {aromas.map(aroma => <option value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         
-                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
+                        <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
                             <select name='taste' required>
                                 <option disabled='' value=''>...</option>
                                 {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
                             </select>
                     
-                         <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):</label>
+                        <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):</label>
                             <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list'/>
                             <datalist id='drinkability-list'>
                                 {numbers.map(number => <option value={number.value}>{number.value}</option>)}
                             </datalist>
-                       
-                         <label htmlFor='notes'>Notes:</label>
-                                <textarea  name='notes' rows='4'></textarea>
-                         <br></br>             
+                        
+                        <label htmlFor='notes'>Notes:</label>
+                            <textarea  name='notes' rows='4'></textarea>
+                        <br></br>             
                         <input type='submit'/>
                     </fieldset>
                 </form>
@@ -91,4 +102,4 @@ import './ReviewForm.css'
         )
     }
 }
- export default withRouter(ReviewForm)
+export default withRouter(CreateBeerForm)

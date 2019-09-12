@@ -16,8 +16,8 @@ class DiaryPage extends Component {
             <div>
                 <h2>Beer Diary</h2>
                 {reviews.map(review => {
-                        const beer = beers.filter(beer => beer.id == review.beerId)
-                        console.log(review)
+                        const beer = beers.filter(beer => beer.id === review.beerId)
+                        
                         return (
                             <div>
                                 {beer.map(beer => 

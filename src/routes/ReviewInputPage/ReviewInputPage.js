@@ -12,7 +12,7 @@ import BeerContext from '../../contexts/BeerContext'
 
     renderBeerInfo() {
         const selectedBeer = this.props.match.params.beerId
-        const beerInfo = this.context.beerResults.filter(beer => beer.id == selectedBeer)
+        const beerInfo = this.context.beerResults.filter(beer => beer.id === selectedBeer)
         
         return beerInfo.map(beer => 
             <BeerItem

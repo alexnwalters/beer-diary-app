@@ -11,6 +11,7 @@ import BeerInfoPage from '../../routes/BeerInfoPage/BeerInfoPage';
 import DiaryPage from '../../routes/DairyPage/DiaryPage';
 import ReviewInputPage from '../../routes/ReviewInputPage/ReviewInputPage'
 import UpdateReviewPage from '../../routes/UpdateReviewPage/UpdateReviewPage'
+import CreateBeerPage from '../../routes/CreateBeerPage/CreateBeerPage'
 
 class App extends Component {
   render() {
@@ -56,6 +57,10 @@ class App extends Component {
             <Route
               path={'/update/:beerId'}
               component={UpdateReviewPage}>
+            </Route>
+            <Route
+              path={'/create'}
+              component={CreateBeerPage}>
             </Route>
           </Switch>  
         </main>

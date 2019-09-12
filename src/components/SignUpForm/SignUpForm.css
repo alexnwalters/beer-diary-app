@@ -11,6 +11,6 @@
     margin: 8px 0;
 }
 
-.SignUpForm input[type=text], input[type=email] {
+.SignUpForm input[type=text], input[type=email], input[type=password] {
     width: 100%;
 }

@@ -1,16 +1,13 @@
-.LoginForm {
+.CreateBeerForm {
     margin-bottom: 16px;
 }
 
-.LoginForm label {
+.CreateBeerForm label {
     display: flex;
     justify-content: space-between;
 }
 
-.LoginForm input {
+.CreateBeerForm input[type=text], input[type=number] {
     margin: 8px 0;
-}
-
-.LoginForm input[type=text], input[type=password] {
     width: 100%;
 }

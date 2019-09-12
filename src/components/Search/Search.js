@@ -25,7 +25,7 @@ class Search extends Component {
                     <input
                         type='text'
                         name='query'
-                        placeholder='Snake Dog Ipa'
+                        placeholder='Ale, Lager, Stout...'
                         required
                     />
                 </label>

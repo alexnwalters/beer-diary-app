@@ -19,7 +19,7 @@ class SignUpForm extends Component {
                         <input type='text' name='username' required/>
                     
                     <label htmlFor='password'>Password:</label>
-                        <input type='text' name='password' required/>
+                        <input type='password' name='password' required/>
                     <div>   
                         <input type='checkbox' required /> I confirm that I'm over the age of 21.
                     </div>  

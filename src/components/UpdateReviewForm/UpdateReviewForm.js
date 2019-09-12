@@ -68,7 +68,7 @@ import './UpdateReviewForm.css'
 
     componentDidMount() {
         const selectedReview = this.props.match.params.beerId
-        const currentReview = this.context.userReviews.find(review => review.beerId == selectedReview)
+        const currentReview = this.context.userReviews.find(review => review.beerId === selectedReview)
         
         this.setState({
             beerId: currentReview.beerId,

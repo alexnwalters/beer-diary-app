@@ -10,7 +10,7 @@ class LoginForm extends Component {
                         <input type='text' name='username' required />
                     
                     <label htmlFor='password'>Password:</label>
-                        <input type='text' name='password' required />
+                        <input type='password' name='password' required />
                     
                     <input type='submit'/>
                 </fieldset>

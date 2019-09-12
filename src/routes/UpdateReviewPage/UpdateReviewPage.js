@@ -13,7 +13,7 @@ import BeerContext from '../../contexts/BeerContext'
 
     renderBeerInfo() {
         const selectedBeer = this.props.match.params.beerId
-        const beerInfo = this.context.beers.filter(beer => beer.id == selectedBeer)
+        const beerInfo = this.context.beers.filter(beer => beer.id === selectedBeer)
         
         return beerInfo.map(beer => 
             <BeerItem
@@ -36,7 +36,7 @@ import BeerContext from '../../contexts/BeerContext'
                     : this.renderBeerInfo()}
                 </div>
                 <UpdateReviewForm />
-                {/* <button onClick={this.props.history.goBack}>Back</button> */}
+                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }
