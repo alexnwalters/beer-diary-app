@@ -11,4 +11,5 @@ ReactDOM.render(
             <App />
         </BeerProvider>
     </BrowserRouter>,
-    document.getElementById('root'));
+    document.getElementById('root')
+);

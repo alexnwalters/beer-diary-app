@@ -8,11 +8,11 @@ class CreateBeerForm extends Component{
     handleSubmit = e => {
         e.preventDefault()
 
-        const beerId = 'testID1'
+        const beer_id = 'testID1'
 
         const { name, brewery, abv, ibu, style, overall, color, aroma, taste, drinkability, notes } = e.target
         const userReview = {
-            beerId: beerId,
+            beer_id: beer_id,
             overall: overall.value,
             color: color.value,
             aroma: aroma.value,
@@ -21,12 +21,14 @@ class CreateBeerForm extends Component{
             notes: notes.value
         }
         const beer = {
-            id: beerId,
+            beer_id: beer_id,
             name: name.value,
             brewery: brewery.value,
+            image: '',
             abv: abv.value || '',
             ibu: ibu.value || '',
-            beerStyle: style.value,            
+            beer_style: style.value,
+            description: '',            
         }
 
         this.context.addBeer(beer)

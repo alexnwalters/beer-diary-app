@@ -6,21 +6,28 @@ import BeerContext from '../../contexts/BeerContext'
  class UpdateReviewPage extends Component {
     static defaultProps = {
         match: { params: {} },
-        history: { goBack: () => {} },
+        history: { 
+            push: () => {},
+            goBack: () => {}
+        },
     }
 
     static contextType = BeerContext
 
     renderBeerInfo() {
-        const selectedBeer = this.props.match.params.beerId
-        const beerInfo = this.context.beers.filter(beer => beer.id === selectedBeer)
-        
-        return beerInfo.map(beer => 
+        const selectedReview = this.props.match.params.review_id
+        const reviewBeerInfo = this.context.userReviews.filter(review => review.id == selectedReview)
+        return reviewBeerInfo.map(review => 
             <BeerItem
-                key={beer.id}
-                {...beer}
+                key={review.beer.beer_id}
+                {...review.beer}
             />
         )
+    }
+
+    handleUpdateSuccess = () => {
+        const { history } = this.props
+        history.push('/diary')
     }
     
     render() {
@@ -35,7 +42,9 @@ import BeerContext from '../../contexts/BeerContext'
                     ? <p>error!</p>
                     : this.renderBeerInfo()}
                 </div>
-                <UpdateReviewForm />
+                <UpdateReviewForm
+                    onUpdateSuccess={this.handleUpdateSuccess}
+                />
                 <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )

@@ -65,6 +65,10 @@ export class BeerProvider extends Component {
         })        
     }
 
+    setUserReviews = userReviews => {
+        this.setState({ userReviews })
+    }
+
     addUserReview = userReview => {
         this.setState({
             userReviews: [ ...this.state.userReviews, userReview ],
@@ -73,7 +77,7 @@ export class BeerProvider extends Component {
 
     deleteUserReview = userReviewId => {
         const newUserReviews = this.state.userReviews.filter(userReview =>
-            userReview.beerId !== userReviewId
+            userReview.id !== userReviewId
         )
         this.setState({
             userReviews: newUserReviews
@@ -83,7 +87,7 @@ export class BeerProvider extends Component {
     updateUserReview = newReview => {
         this.setState({
             userReviews: this.state.userReviews.map(review =>
-                (review.beerId !== newReview.beerId) ? review : newReview
+                (review.beer_id !== newReview.beer_id) ? review : newReview
             )
         })
     }
@@ -102,6 +106,7 @@ export class BeerProvider extends Component {
             beers: this.state.beers,
             userReviews: this.state.userReviews,
             addBeer: this.addBeer,
+            setUserReviews: this.setUserReviews,
             addUserReview: this.addUserReview,
             deleteUserReview: this.deleteUserReview,
             updateUserReview: this.updateUserReview,

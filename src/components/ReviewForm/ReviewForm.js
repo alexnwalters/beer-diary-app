@@ -2,22 +2,39 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import BeerContext from '../../contexts/BeerContext'
 import './ReviewForm.css'
+import BeerDiaryApiService from '../../services/BeerDiaryApiService'
 
  class ReviewForm extends Component{
     static defaultProps = {
         match: { params: {} },
+        onReviewSuccess: () => {},
     }
 
     static contextType = BeerContext
 
     handleSubmit = e => {
         e.preventDefault()
-        const selectedBeer = this.props.match.params.beerId
+        const selectedBeer = this.props.match.params.beer_id
         const beerReviewed = this.context.beerResults.find(beer => beer.id === selectedBeer)
 
         const { overall, color, aroma, taste, drinkability, notes } = e.target
+        
+        const beer = {
+            beer_id: beerReviewed.id,
+            name: beerReviewed.name,
+            brewery: beerReviewed.breweries[0].name || '',
+            image: beerReviewed.breweries[0].images.icon || '',
+            abv: beerReviewed.abv || beerReviewed.style.abvMax || '',
+            ibu: beerReviewed.ibu || beerReviewed.style.ibuMax || '',
+            beer_style: beerReviewed.style.shortName || '',
+            description: beerReviewed.description || '',
+        }
+        
+        BeerDiaryApiService.postBeer(beer)
+            .catch(this.context.setError)
+        
         const userReview = {
-            beerId: beerReviewed.id,
+            beer_id: beerReviewed.id,
             overall: overall.value,
             color: color.value,
             aroma: aroma.value,
@@ -25,21 +42,12 @@ import './ReviewForm.css'
             drinkability: drinkability.value,
             notes: notes.value
         }
-        const beer = {
-            id: beerReviewed.id,
-            name: beerReviewed.name,
-            brewery: beerReviewed.breweries[0].name || '',
-            image: beerReviewed.breweries[0].images.icon || '',
-            abv: beerReviewed.abv || beerReviewed.style.abvMax || '',
-            ibu: beerReviewed.ibu || beerReviewed.style.ibuMax || '',
-            beerStyle: beerReviewed.style.shortName || '',
-            description: beerReviewed.description || '',
-        }
 
-        this.context.addBeer(beer)
-        this.context.addUserReview(userReview)
-
-        this.props.history.push('/diary')
+        BeerDiaryApiService.postReview(userReview)
+            .then(() => {
+                this.props.onReviewSuccess()
+            })
+            .catch(this.context.setError)
     }
 
     render() {

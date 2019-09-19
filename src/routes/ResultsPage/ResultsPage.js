@@ -14,7 +14,7 @@ class ResultsPage extends Component {
         return (
             <ul>
                 {beerResults.map((beer, i) => {
-                    const review = userReviews.filter(review => review.beerId === beer.id)
+                    const review = userReviews.filter(review => review.beer.beer_id === beer.id)
 
                     if(review.length) {
                         return (

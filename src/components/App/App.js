@@ -3,12 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
+import PrivateRoute from '../../utils/PrivateRoute';
+import PublicOnlyRoute from '../../utils/PublicOnlyRoute';
 import LandingPage from '../../routes/LandingPage/LandingPage'
 import SignUpPage from '../../routes/SignUpPage/SignUpPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import ResultsPage from '../../routes/ResultsPage/ResultsPage';
 import BeerInfoPage from '../../routes/BeerInfoPage/BeerInfoPage';
-import DiaryPage from '../../routes/DairyPage/DiaryPage';
+import DiaryPage from '../../routes/DiaryPage/DiaryPage';
 import ReviewInputPage from '../../routes/ReviewInputPage/ReviewInputPage'
 import UpdateReviewPage from '../../routes/UpdateReviewPage/UpdateReviewPage'
 import CreateBeerPage from '../../routes/CreateBeerPage/CreateBeerPage'
@@ -28,40 +30,39 @@ class App extends Component {
             <Route
               exact
               path={'/'}
-              component={LandingPage}>
-            </Route>
-            <Route
+              component={LandingPage}
+            />
+            <PublicOnlyRoute
               path={'/signup'}
-              component={SignUpPage}>     
-            </Route>
-            <Route
+              component={SignUpPage}
+            />
+            <PublicOnlyRoute
               path={'/login'}
-              component={LoginPage}>
-            </Route>
+              component={LoginPage}
+            />
             <Route
               path={'/search'}
-              component={ResultsPage}>
-            </Route>
+              component={ResultsPage}/>
             <Route
-              path={'/beer/:beerId'}
-              component={BeerInfoPage}>
-            </Route>
-            <Route
+              path={'/beer/:beer_id'}
+              component={BeerInfoPage}
+            />
+            <PrivateRoute
               path={'/diary'}
-              component={DiaryPage}>
-            </Route>
-            <Route
-              path={'/review/:beerId'}
-              component={ReviewInputPage}>
-            </Route>
-            <Route
-              path={'/update/:beerId'}
-              component={UpdateReviewPage}>
-            </Route>
-            <Route
+              component={DiaryPage}
+            />
+            <PrivateRoute
+              path={'/review/:beer_id'}
+              component={ReviewInputPage}
+            />
+            <PrivateRoute
+              path={'/update/:review_id'}
+              component={UpdateReviewPage}
+            />
+            <PrivateRoute
               path={'/create'}
-              component={CreateBeerPage}>
-            </Route>
+              component={CreateBeerPage}
+            />
           </Switch>  
         </main>
       </div>
@@ -69,4 +70,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

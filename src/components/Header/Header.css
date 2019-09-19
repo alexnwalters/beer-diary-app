@@ -1,11 +1,11 @@
-.Header {
+.Header_Private, .Header_Public {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    padding: 20px 0px;
+    padding: 20px 10px;
     background-color: white;
 }
 

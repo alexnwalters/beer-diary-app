@@ -7,7 +7,7 @@ export default function BeerItem(props) {
 
     return (
         <div className='BeerItem'>
-            <Link to={`/beer/${props.id}`}>
+            <Link to={`/beer/${props.beer_id || props.id}`}>
                 <h3>{props.name}</h3>
             </Link>
             <p>{props.brewery || props.breweries[0].name || 'Brewery Unknown'}</p>
@@ -17,7 +17,7 @@ export default function BeerItem(props) {
                 <li>ABV: {props.abv || props.style.abvMax || '-'}</li>
                 <li>IBU: {props.ibu || props.style.ibuMax || '-'}</li>
             </ul>
-            <p>{props.beerStyle || props.style.shortName || ''}</p>
+            <p>{props.beer_style || props.style.shortName || ''}</p>
             <p>{props.description || ''}</p>
             </div>
         </div>

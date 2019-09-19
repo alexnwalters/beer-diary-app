@@ -1,22 +1,48 @@
 import React, { Component } from 'react';
-import './SignUpForm.css'
+import AuthApiService from '../../services/AuthApiService';
+import './SignUpForm.css';
 
 class SignUpForm extends Component {
+    static defaultProps = {
+        onSignUpSuccess: () => {}
+    }
+        
+    state = { error: null }
+    
+    handleSubmit = e => {
+        e.preventDefault()
+        const { full_name, user_name, password } = e.target
+
+        this.setState({ error: null })
+        AuthApiService.postUser({
+            full_name: full_name.value,
+            user_name: user_name.value,
+            password: password.value,
+        })
+            .then(user => {
+                full_name.value = ''
+                user_name.value = ''
+                password.value = ''
+                this.props.onSignUpSuccess()
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
+            })
+    }
+
     render() {
+        const { error } = this.state
         return(
-            <form className='SignUpForm'>
+            <form className='SignUpForm' onSubmit={this.handleSubmit}>
+                <div role='alert'>
+                    {error && <p className='red'>{error}</p>}
+                </div>
                 <fieldset>
-                    <label htmlFor='first-name'>First Name:</label>
-                        <input type='text' name='first-name' required/>
-            
-                    <label htmlFor='last-name'>Last Name:</label>
-                        <input type='text' name='last-name' required/>
+                    <label htmlFor='full_name'>Full Name:</label>
+                        <input type='text' name='full_name' required/>
                     
-                    <label htmlFor='email'>Email Address:</label>
-                        <input type='email' name='email' required/>
-                    
-                    <label htmlFor='username'>Username:</label>
-                        <input type='text' name='username' required/>
+                    <label htmlFor='user_name'>Username:</label>
+                        <input type='text' name='user_name' required/>
                     
                     <label htmlFor='password'>Password:</label>
                         <input type='password' name='password' required/>

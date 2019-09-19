@@ -12,14 +12,17 @@ class BeerInfoPage extends Component {
     static contextType = BeerContext
 
     renderBeerInfo() {
-        const selectedBeerId = this.props.match.params.beerId
+        const selectedBeerId = this.props.match.params.beer_id
         const beerInfoFromResults = this.context.beerResults.filter(beer => beer.id === selectedBeerId)
-        const beerInfoFromReview = this.context.beers.filter(beer => beer.id === selectedBeerId)
+        const beerInfoFromReview = this.context.userReviews.filter(review => review.beer.beer_id == selectedBeerId)
         const userReviews = this.context.userReviews
 
+        console.log(beerInfoFromResults)
+        console.log(selectedBeerId)
+        console.log(beerInfoFromReview)
         if(beerInfoFromResults.length) {
             return beerInfoFromResults.map(beer => {
-                const review = userReviews.find(review => review.beerId === beer.id)
+                const review = userReviews.find(review => review.beer.beer_id === beer.id)
                 if(review) {
                     return (
                         <div>
@@ -37,24 +40,13 @@ class BeerInfoPage extends Component {
                 }
             })
         } else {
-            return beerInfoFromReview.map(beer => {
-                const review = userReviews.find(review => review.beerId === beer.id) 
-                if(review) {
-                    
-                    return (
-                        <div>
-                            <BeerItem key={beer.id} {...beer}/>
-                            <UserReview key={review.id} {...review}/>
-                        </div>
-                    )
-                } else {
-                    return (
-                        <div>
-                            <BeerItem key={beer.id} {...beer}/>
-                            <ReviewButton key={beer.id} {...beer}/>
-                        </div>
-                    )
-                }
+            return beerInfoFromReview.map(review => {
+                return (
+                    <div>
+                        <BeerItem key={review.beer.beer_id} {...review.beer}/>
+                        <UserReview key={review.id} {...review}/>
+                    </div>
+                )
             })
         }
     }

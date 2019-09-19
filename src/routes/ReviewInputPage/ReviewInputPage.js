@@ -6,6 +6,9 @@ import BeerContext from '../../contexts/BeerContext'
  class ReviewInputPage extends Component {
     static defaultProps = {
         match: { params: {} },
+        history: {
+            push: () => {},
+        },
     }
 
     static contextType = BeerContext
@@ -21,6 +24,11 @@ import BeerContext from '../../contexts/BeerContext'
             />
         )
     }
+
+    handleReviewSuccess = userReview => {
+        const { history } = this.props
+        history.push('/diary')
+    }
     
     render() {
         
@@ -31,10 +39,12 @@ import BeerContext from '../../contexts/BeerContext'
                 <h2>Provide Your Review:</h2>
                 <div>
                 {error
-                    ? <p>error!</p>
+                    ? <p>Error</p>
                     : this.renderBeerInfo()}
                 </div>
-                <ReviewForm />
+                <ReviewForm 
+                    onReviewSuccess={this.handleReviewSuccess}
+                />
                 <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )

@@ -1,13 +1,46 @@
 import React, { Component } from 'react';
-import './LoginForm.css'
+import TokenService from '../../services/TokenService';
+import AuthApiService from '../../services/AuthApiService';
+import './LoginForm.css';
  
 class LoginForm extends Component {
+    static defaultProps = {
+        onLoginSuccess: () =>{}
+    }
+
+    state = { error: null }
+
+    handleSubmitJwtAuth = e => {
+        e.preventDefault()
+        this.setState({ error: null })
+        const { user_name, password } = e.target
+
+        AuthApiService.postLogin({
+            user_name: user_name.value,
+            password: password.value
+        })
+            .then(res => {
+                user_name.value = ''
+                password.value = ''
+                TokenService.saveAuthToken(res.authToken)
+                this.props.onLoginSuccess()
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
+            })
+    }
+
     render() {
+        const { error } = this.state
+
         return(
-            <form className='LoginForm'>
+            <form className='LoginForm' onSubmit={this.handleSubmitJwtAuth}>
+                <div role='alert'>
+                    {error && <p className='red'>{ error }</p>}
+                </div>
                 <fieldset>
-                    <label htmlFor='username'>Username:</label>
-                        <input type='text' name='username' required />
+                    <label htmlFor='user_name'>Username:</label>
+                        <input type='text' name='user_name' required />
                     
                     <label htmlFor='password'>Password:</label>
                         <input type='password' name='password' required />

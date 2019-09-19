@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BeerContext from '../../contexts/BeerContext';
+import BeerDiaryApiService from '../../services/BeerDiaryApiService';
 
 export default function UserReview(props) {
     return (
@@ -16,10 +17,10 @@ export default function UserReview(props) {
                         <li>Drinkability: {props.drinkability}</li>
                         <li>Notes: {props.notes}</li>
                     </ul>
-                    <Link to={`/update/${props.beerId}`}>
+                    <Link to={`/update/${props.id}`}>
                         <button>Update</button>
                     </Link>
-                    <button onClick={() => {context.deleteUserReview(props.beerId)}}>Delete</button>                    
+                    <button onClick={() => BeerDiaryApiService.deleteReview(props.id, context.deleteUserReview)}>Delete</button>                    
                 </div>
             )}
         </BeerContext.Consumer>

@@ -2,22 +2,25 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import BeerContext from '../../contexts/BeerContext'
 import './UpdateReviewForm.css'
+import BeerDiaryApiService from '../../services/BeerDiaryApiService'
 
  class UpdateReviewForm extends Component {
     static defaultProps = {
         match: { params: {} },
+        onUpdateSuccess: () => {},
     }
     
     static contextType = BeerContext
 
     state = {
-        beerId: '',
+        error: null,
         overall: '',
         color: '',
         aroma: '',
         taste: '',
         drinkability: '',
         notes: '',
+        date_modified: new Date(),
     }
 
     handleChangeOverall = e => {
@@ -44,34 +47,45 @@ import './UpdateReviewForm.css'
         this.setState({ notes: e.target.value })
     };
     
-    resetFields = (newFields) => {
-        this.setState({
-            beerId: newFields.beerId || '',
-            overall: newFields.overall || '',
-            color: newFields.color || '',
-            aroma: newFields.aroma || '',
-            taste: newFields.taste || '',
-            drinkability: newFields.drinkability || '',
-            notes: newFields.notes || '',
-        })
-    }
     handleSubmit = e => {
         e.preventDefault()
-        const { beerId, overall, color, aroma, taste, drinkability, notes } = this.state
-        const newReview = { beerId, overall, color, aroma, taste, drinkability, notes }
-
-        this.resetFields(newReview)
-        this.context.updateUserReview(newReview)
-
-        this.props.history.push('/diary')
+        const review_id = this.props.match.params.review_id
+        const { overall, color, aroma, taste, drinkability, notes, date_modified } = this.state
+        const newReview = { overall, color, aroma, taste, drinkability, notes, date_modified }
+        
+        BeerDiaryApiService.updateReview(newReview, review_id)
+            .then(res => {
+                overall.value = ''
+                color.value = ''
+                aroma.value = ''
+                taste.value = ''
+                drinkability.value = ''
+                notes.value = ''
+                console.log(res)
+                this.props.history.push('/diary')
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
+            }) 
+        // .then(res => {
+        //     overall.value = ''
+        //     color.value = ''
+        //     aroma.value = ''
+        //     taste.value = ''
+        //     drinkability.value = ''
+        //     notes.value = ''
+        //     this.props.onUpdateSuccess()
+        // })
+        // .catch(res => {
+        //     this.setState({ error: res.error })
+        // })          
     }
 
     componentDidMount() {
-        const selectedReview = this.props.match.params.beerId
-        const currentReview = this.context.userReviews.find(review => review.beerId === selectedReview)
+        const selectedReview = this.props.match.params.review_id
+        const currentReview = this.context.userReviews.find(review => review.id == selectedReview)
         
         this.setState({
-            beerId: currentReview.beerId,
             overall: currentReview.overall,
             color: currentReview.color,
             aroma: currentReview.aroma,
@@ -82,6 +96,7 @@ import './UpdateReviewForm.css'
     }
 
     render() {
+        const { error } = this.state
         const aromas = [{name: 'Bready'}, {name: 'Nutty'}, {name: 'Toasty'}, {name: 'Roasted'}, {name: 'Floral'}, {name: 'Fruity'}, {name: 'Piney'}, {name: 'Spicy'}]
         const tastes = [{name: 'Crisp'}, {name: 'Hop'}, {name: 'Malt'}, {name: 'Roast'}, {name: 'Smoke'}, {name: 'Fruit & Spice'}, {name: 'Tart & Funky'}]
         const numbers = [{value: 1}, {value: 2}, {value: 3}, {value: 4}, {value: 5}]
@@ -89,7 +104,10 @@ import './UpdateReviewForm.css'
 
         return (
             <div>
-                <form className='UpdateReviewForm' onSubmit={this.handleSubmit}> 
+                <form className='UpdateReviewForm' onSubmit={this.handleSubmit}>
+                <div role='alert'>
+                    {error && <p className='red'>Error Handling Update Submit</p>}
+                </div> 
                     <fieldset>
                         <label htmlFor='overall'>Overall(1 to 5):</label>
                             <input type='range' name='overall' min='1' max='5' step='1' list='overall-list' value={ overall } onChange={ this.handleChangeOverall }/>
