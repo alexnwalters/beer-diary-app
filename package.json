@@ -11,14 +11,15 @@
     "react-scripts": "3.1.1",
     "uuid": "^3.3.3"
   },
-  "scripts": {
+    "scripts": {
     "start": "react-scripts start",
     "prebuild": "react-scripts test",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "now ./build"
+    "deploy": "now ./build",
+    "postdeploy": "now alias -A ./build/now.json"
   },
   "eslintConfig": {
     "extends": "react-app"

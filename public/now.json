@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "alias": "Beer-Diary-App",
     "name": "beer-diary-app",
     "routes": [
         {

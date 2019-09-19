@@ -61,7 +61,6 @@ import BeerDiaryApiService from '../../services/BeerDiaryApiService'
                 taste.value = ''
                 drinkability.value = ''
                 notes.value = ''
-                console.log(res)
                 this.props.history.push('/diary')
             })
             .catch(res => {

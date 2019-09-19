@@ -1,5 +1,6 @@
 .CreateBeerForm {
     margin-bottom: 16px;
+    font-size: 16px;
 }
 
 .CreateBeerForm label {
@@ -7,7 +8,11 @@
     justify-content: space-between;
 }
 
-.CreateBeerForm input[type=text], input[type=number] {
+.CreateBeerForm input[type=text], input[type=number], input[type=range], select {
     margin: 8px 0;
     width: 100%;
+}
+
+.CreateBeerForm fieldset {
+    margin-top: 16px;
 }

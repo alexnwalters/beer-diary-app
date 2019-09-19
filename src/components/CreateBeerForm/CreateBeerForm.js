@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import BeerContext from '../../contexts/BeerContext'
+import BeerContext from '../../contexts/BeerContext';
+import BeerDiaryApiService from '../../services/BeerDiaryApiService';
+import './CreateBeerForm.css';
 
 class CreateBeerForm extends Component{
+    static defaultProps = {
+        match: { params: {} },
+        onReviewSuccess: () => {},
+    }
+
     static contextType = BeerContext
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
 
     handleSubmit = e => {
         e.preventDefault()
 
-        const beer_id = 'testID1'
+        const beer_id = this.getRandomInt(1000000)
 
         const { name, brewery, abv, ibu, style, overall, color, aroma, taste, drinkability, notes } = e.target
         const userReview = {
@@ -31,10 +42,15 @@ class CreateBeerForm extends Component{
             description: '',            
         }
 
-        this.context.addBeer(beer)
-        this.context.addUserReview(userReview)
+        BeerDiaryApiService.postBeer(beer)
+            .catch(this.context.setError)
 
-        this.props.history.push('/diary')
+        BeerDiaryApiService.postReview(userReview)
+        .then(() => {
+            this.props.onCreateSuccess()
+        })
+        .catch(this.context.setError)    
+        // this.props.history.push('/diary')
     }
 
     render() {
