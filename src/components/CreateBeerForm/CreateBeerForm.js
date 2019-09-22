@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import BeerContext from '../../contexts/BeerContext';
 import BeerDiaryApiService from '../../services/BeerDiaryApiService';
+import OverallRating from '../OverallRating/OverallRating';
+import ColorRating from '../ColorRating/ColorRating';
+import DrinkabilityRating from '../DrinkabilityRating/DrinkabilityRating';
 import './CreateBeerForm.css';
 
 class CreateBeerForm extends Component{
@@ -12,6 +15,40 @@ class CreateBeerForm extends Component{
 
     static contextType = BeerContext
 
+    state = {
+        error: null,
+        overall: '',
+        color: '',
+        aroma: '',
+        taste: '',
+        drinkability: '',
+        notes: '',
+    }
+
+    handleChangeOverall = e => {
+        this.setState({ overall: e.target.value })
+    };
+
+    handleChangeColor = e => {
+        this.setState({ color: e.target.value })
+    };
+
+    handleChangeAroma = e => {
+        this.setState({ aroma: e.target.value })
+    };
+
+    handleChangeTaste = e => {
+        this.setState({ taste: e.target.value })
+    };
+
+    handleChangeDrinkability = e => {
+        this.setState({ drinkability: e.target.value })
+    };
+
+    handleChangeNotes = e => {
+        this.setState({ notes: e.target.value })
+    };
+
     getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
@@ -21,15 +58,17 @@ class CreateBeerForm extends Component{
 
         const beer_id = this.getRandomInt(1000000)
 
-        const { name, brewery, abv, ibu, style, overall, color, aroma, taste, drinkability, notes } = e.target
+        const { name, brewery, abv, ibu, style } = e.target
+        const { overall, color, aroma, taste, drinkability, notes } = this.state
+
         const userReview = {
             beer_id: beer_id,
-            overall: overall.value,
-            color: color.value,
-            aroma: aroma.value,
-            taste: taste.value,
-            drinkability: drinkability.value,
-            notes: notes.value
+            overall: Math.round(overall),
+            color: Math.round(color),
+            aroma: aroma,
+            taste: taste,
+            drinkability: Math.round(drinkability),
+            notes: notes,
         }
         const beer = {
             beer_id: beer_id,
@@ -50,13 +89,13 @@ class CreateBeerForm extends Component{
             this.props.onCreateSuccess()
         })
         .catch(this.context.setError)    
-        // this.props.history.push('/diary')
     }
 
     render() {
+        const { overall, color, aroma, taste, drinkability, notes } = this.state
         const aromas = [{name: 'Bready'}, {name: 'Nutty'}, {name: 'Toasty'}, {name: 'Roasted'}, {name: 'Floral'}, {name: 'Fruity'}, {name: 'Piney'}, {name: 'Spicy'}]
         const tastes = [{name: 'Crisp'}, {name: 'Hop'}, {name: 'Malt'}, {name: 'Roast'}, {name: 'Smoke'}, {name: 'Fruit & Spice'}, {name: 'Tart & Funky'}]
-        const numbers = [{value: 1}, {value: 2}, {value: 3}, {value: 4}, {value: 5}]
+
         return (
             <div>
                 <form className='CreateBeerForm' onSubmit={this.handleSubmit}>
@@ -79,40 +118,33 @@ class CreateBeerForm extends Component{
                     </fieldset> 
                     <fieldset>
                         <legend>Beer Review</legend>
-                        <label htmlFor='overall'>Overall(1 to 5):</label>
-                            <input type='range' name='overall' min='1' max='5' step='1' list='overall-list'/>
-                            <datalist id='overall-list'>
-                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
-                            </datalist>
+                        <label htmlFor='overall'>Overall:</label>
+                            <OverallRating value={Math.round(overall)}/>
+                            <input type='range' name='overall' min='1' max='5' step='.0001' className='slider' value={ overall } onChange={ this.handleChangeOverall } required/>
                         
-
-                        <label htmlFor='color'>Color(Light to Dark):</label>
-                            <input type='range' name='color' min='1' max='5' step='1' list='color-list'/>
-                            <datalist id='color-list'>
-                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
-                            </datalist>
+                        <label htmlFor='color'>Color:</label>
+                            <ColorRating value={Math.round(color)}/>
+                            <input type='range' name='color' min='1' max='5' step='.0001' className='slider' value={ color } onChange={ this.handleChangeColor } required/>
                         
-                        <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
-                            <select name='aroma' required>
+                         <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
+                            <select name='aroma' value={ aroma } onChange={ this.handleChangeAroma } required>
                                 <option disabled='' value=''>...</option>
                                 {aromas.map(aroma => <option value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         
-                        <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
-                            <select name='taste' required>
+                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
+                            <select name='taste' value={ taste } onChange={ this.handleChangeTaste } required>
                                 <option disabled='' value=''>...</option>
                                 {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
                             </select>
-                    
-                        <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):</label>
-                            <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list'/>
-                            <datalist id='drinkability-list'>
-                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
-                            </datalist>
                         
-                        <label htmlFor='notes'>Notes:</label>
-                            <textarea  name='notes' rows='4'></textarea>
-                        <br></br>             
+                         <label htmlFor='drinkability'>Drinkability:</label>
+                            <DrinkabilityRating value={Math.round(drinkability)}/>
+                            <input type='range' name='drinkability' min='1' max='5' step='.0001' className='slider' value={ drinkability } onChange={ this.handleChangeDrinkability } required/>
+                       
+                         <label htmlFor='notes'>Notes:</label>
+                                <textarea  name='notes' rows='4' value={ notes } onChange={ this.handleChangeNotes }></textarea>
+                        <br></br>              
                         <input type='submit'/>
                     </fieldset>
                 </form>

@@ -4,8 +4,9 @@ import AuthApiService from '../../services/AuthApiService';
 import './LoginForm.css';
  
 class LoginForm extends Component {
+
     static defaultProps = {
-        onLoginSuccess: () =>{}
+        onLoginSuccess: () =>{},
     }
 
     state = { error: null }

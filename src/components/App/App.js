@@ -16,6 +16,7 @@ import UpdateReviewPage from '../../routes/UpdateReviewPage/UpdateReviewPage'
 import CreateBeerPage from '../../routes/CreateBeerPage/CreateBeerPage'
 
 class App extends Component {
+
   render() {
     return (
       <div className='App'>

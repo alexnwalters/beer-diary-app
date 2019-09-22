@@ -1,5 +1,40 @@
-.BeerItem {
-    max-width: 100vw;
-    border-top: solid 1px gray;
-    margin-top: 8px;
+.BeerItem a:link, .BeerItem a:visited {
+    text-decoration: none;
+    color: initial;
+}
+
+.BeerItem_link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.BeerItem_logo {
+    margin-right: 20px;
+}
+
+.BeerItem_title h3, .BeerItem_title p {
+    text-align: left;
+    margin: 0px;
+}
+
+.BeerItem_title p {
+    border-top: 1px solid gray;
+}
+
+.BeerItem ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+.BeerItem_abv_ibu {
+    font-size: 10px;
+}
+.BeerItem_notes {
+    text-align: justify;
+    font-size: 12px;
+    margin: 4px;
 }

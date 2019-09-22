@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import BeerImage from '../../utils/beer.png'
+import BeerImage from '../../utils/images/beer.png'
 import './BeerItem.css'
 
 export default function BeerItem(props) {
@@ -8,17 +8,21 @@ export default function BeerItem(props) {
     return (
         <div className='BeerItem'>
             <Link to={`/beer/${props.beer_id || props.id}`}>
-                <h3>{props.name}</h3>
+                <div className='BeerItem_link'>
+                    <img className='BeerItem_logo' src={(props.breweries[0].images.icon !== null) ? props.breweries[0].images.icon : props.image || BeerImage } alt='beer' style={{width: 64, height: 64}} resizeMode='contain'/>
+                    <div className='BeerItem_title'>
+                        <h3>{props.name}</h3>
+                        <p>{props.brewery || props.breweries[0].name || 'Brewery Unknown'}</p>
+                    </div>
+                </div>
             </Link>
-            <p>{props.brewery || props.breweries[0].name || 'Brewery Unknown'}</p>
-            <p><img src={(props.breweries[0].images.icon !== null) ? props.breweries[0].images.icon : props.image || BeerImage } alt='beer' style={{width: 64, height: 64}} resizeMode='contain'/></p>
            <div>
             <ul>
-                <li>ABV: {props.abv || props.style.abvMax || '-'}</li>
-                <li>IBU: {props.ibu || props.style.ibuMax || '-'}</li>
+                <li>{props.beer_style || props.style.shortName || ''}</li>
+                <li><span className='BeerItem_abv_ibu'>ABV</span> {props.abv || props.style.abvMax || '-'}</li>
+                <li><span className='BeerItem_abv_ibu'>IBU</span> {props.ibu || props.style.ibuMax || '-'}</li>
             </ul>
-            <p>{props.beer_style || props.style.shortName || ''}</p>
-            <p>{props.description || ''}</p>
+            <p className='BeerItem_notes'>{props.description || ''}</p>
             </div>
         </div>
     )

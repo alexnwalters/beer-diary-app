@@ -4,8 +4,19 @@ import TokenService from '../../services/TokenService'
 import './Header.css'
 
 class Header extends Component {
+
+	constructor(props) {
+		super(props)
+		this.state = {
+			checkLogin: TokenService.hasAuthToken()
+		}
+	}
+
 	handleLogout = () => {
 		TokenService.clearAuthToken()
+		this.setState({
+			checkLogin: false
+		})
 	}
 	
 	renderPublicLinks() {
@@ -28,9 +39,10 @@ class Header extends Component {
 	}
 
     render() {
+		const { checkLogin } = this.state
         return (
             <nav className='Header'>
-				{TokenService.hasAuthToken()
+				{checkLogin
 					? this.renderPrivateLinks()
 					: this.renderPublicLinks()}
 			</nav>

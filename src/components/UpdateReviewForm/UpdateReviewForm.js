@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import BeerContext from '../../contexts/BeerContext'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import BeerContext from '../../contexts/BeerContext';
+import BeerDiaryApiService from '../../services/BeerDiaryApiService';
+import OverallRating from '../OverallRating/OverallRating';
+import ColorRating from '../ColorRating/ColorRating';
+import DrinkabilityRating from '../DrinkabilityRating/DrinkabilityRating';
 import './UpdateReviewForm.css'
-import BeerDiaryApiService from '../../services/BeerDiaryApiService'
 
  class UpdateReviewForm extends Component {
     static defaultProps = {
@@ -51,7 +54,15 @@ import BeerDiaryApiService from '../../services/BeerDiaryApiService'
         e.preventDefault()
         const review_id = this.props.match.params.review_id
         const { overall, color, aroma, taste, drinkability, notes, date_modified } = this.state
-        const newReview = { overall, color, aroma, taste, drinkability, notes, date_modified }
+        const newReview = {
+            overall: Math.round(overall),
+            color: Math.round(color),
+            aroma: aroma,
+            taste: taste,
+            drinkability: Math.round(drinkability),
+            notes: notes,
+            date_modified: date_modified
+        }
         
         BeerDiaryApiService.updateReview(newReview, review_id)
             .then(res => {
@@ -61,26 +72,14 @@ import BeerDiaryApiService from '../../services/BeerDiaryApiService'
                 taste.value = ''
                 drinkability.value = ''
                 notes.value = ''
-                this.props.history.push('/diary')
             })
             .catch(res => {
                 this.setState({ error: res.error })
-            }) 
-        // .then(res => {
-        //     overall.value = ''
-        //     color.value = ''
-        //     aroma.value = ''
-        //     taste.value = ''
-        //     drinkability.value = ''
-        //     notes.value = ''
-        //     this.props.onUpdateSuccess()
-        // })
-        // .catch(res => {
-        //     this.setState({ error: res.error })
-        // })          
+            })        
     }
 
     componentDidMount() {
+        this.context.clearError()
         const selectedReview = this.props.match.params.review_id
         const currentReview = this.context.userReviews.find(review => review.id == selectedReview)
         
@@ -95,11 +94,9 @@ import BeerDiaryApiService from '../../services/BeerDiaryApiService'
     }
 
     render() {
-        const { error } = this.state
+        const { error, overall, color, aroma, taste, drinkability, notes } = this.state
         const aromas = [{name: 'Bready'}, {name: 'Nutty'}, {name: 'Toasty'}, {name: 'Roasted'}, {name: 'Floral'}, {name: 'Fruity'}, {name: 'Piney'}, {name: 'Spicy'}]
         const tastes = [{name: 'Crisp'}, {name: 'Hop'}, {name: 'Malt'}, {name: 'Roast'}, {name: 'Smoke'}, {name: 'Fruit & Spice'}, {name: 'Tart & Funky'}]
-        const numbers = [{value: 1}, {value: 2}, {value: 3}, {value: 4}, {value: 5}]
-        const { overall, color, aroma, taste, drinkability, notes } = this.state
 
         return (
             <div>
@@ -108,17 +105,13 @@ import BeerDiaryApiService from '../../services/BeerDiaryApiService'
                     {error && <p className='red'>Error Handling Update Submit</p>}
                 </div> 
                     <fieldset>
-                        <label htmlFor='overall'>Overall(1 to 5):</label>
-                            <input type='range' name='overall' min='1' max='5' step='1' list='overall-list' value={ overall } onChange={ this.handleChangeOverall }/>
-                            <datalist id='overall-list'>
-                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
-                            </datalist>
+                    <label htmlFor='overall'>Overall:</label>
+                            <OverallRating value={Math.round(overall)}/>
+                            <input type='range' name='overall' min='1' max='5' step='.0001' className='slider' value={ overall } onChange={ this.handleChangeOverall } required/>
                         
-                         <label htmlFor='color'>Color(Light to Dark):</label>
-                            <input type='range' name='color' min='1' max='5' step='1' list='color-list' value={ color } onChange={ this.handleChangeColor }/>
-                            <datalist id='color-list'>
-                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
-                            </datalist>
+                        <label htmlFor='color'>Color:</label>
+                            <ColorRating value={Math.round(color)}/>
+                            <input type='range' name='color' min='1' max='5' step='.0001' className='slider' value={ color } onChange={ this.handleChangeColor } required/>
                         
                          <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
                             <select name='aroma' value={ aroma } onChange={ this.handleChangeAroma } required>
@@ -132,11 +125,9 @@ import BeerDiaryApiService from '../../services/BeerDiaryApiService'
                                 {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
                             </select>
                         
-                         <label htmlFor='drinkability'>Drinkability('One and Done' to 'Keep'em Coming'):</label>
-                            <input type='range' name='drinkability' min='1' max='5' step='1' list='drinkability-list' value={ drinkability } onChange={ this.handleChangeDrinkability }/>
-                            <datalist id='drinkability-list'>
-                                {numbers.map(number => <option value={number.value}>{number.value}</option>)}
-                            </datalist>
+                         <label htmlFor='drinkability'>Drinkability:</label>
+                            <DrinkabilityRating value={Math.round(drinkability)}/>
+                            <input type='range' name='drinkability' min='1' max='5' step='.0001' className='slider' value={ drinkability } onChange={ this.handleChangeDrinkability } required/>
                        
                          <label htmlFor='notes'>Notes:</label>
                                 <textarea  name='notes' rows='4' value={ notes } onChange={ this.handleChangeNotes }></textarea>

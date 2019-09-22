@@ -1,0 +1,44 @@
+.UserReview h3 {
+    font-size: 16px;
+    margin: 4px;
+}
+
+.UserReview p {
+    font-size: 14px;
+    margin: 0px;
+}
+
+.UserReview_selection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.UserReview_selection div {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.UserReview_range {
+    margin: 0px;
+}
+.UserReview_range li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.UserReview_notes {
+    text-align: justify;
+    font-size: 12px;
+}
+
+.UserReview_results {
+    width: 75%;
+    margin-left: 10px;
+    margin-bottom: 4px;
+}
+
+.UserReview_aroma, .UserReview_taste {
+    font-size: 16px;
+}

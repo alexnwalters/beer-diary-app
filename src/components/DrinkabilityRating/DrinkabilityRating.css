@@ -1,0 +1,18 @@
+.drinkability_rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.color_beer {
+    background: url('../../utils/images/beer-golden-32.png');
+    width: 32px;
+    height: 32px;
+}
+
+.blank_beer {
+    background: url('../../utils/images/beer-blank-16.png') no-repeat center;
+    width: 32px;
+    height: 32px;
+}

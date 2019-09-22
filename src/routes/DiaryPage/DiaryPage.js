@@ -4,7 +4,6 @@ import BeerItem from '../../components/BeerItem/BeerItem'
 import BeerContext from '../../contexts/BeerContext'
 import BeerDiaryApiService from '../../services/BeerDiaryApiService';
 
-
 class DiaryPage extends Component {
 
     static contextType = BeerContext
@@ -30,7 +29,7 @@ class DiaryPage extends Component {
                         const beer = beers.filter(beer => beer.beer_id === review.beer.beer_id)
                         
                         return (
-                            <div>
+                            <div className='container'>
                                 {beer.map(beer => 
                                     <BeerItem
                                         key={beer.id}

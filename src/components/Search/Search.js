@@ -14,22 +14,21 @@ class Search extends Component {
 
         const query = e.target.query.value
         this.context.setQuery(query)
-
         this.props.history.push('/search')
     }
 
     render() {
         return(
             <form className='search' onSubmit={this.handleSubmit}>
-                <label htmlFor='query'>Search Beers:
+                <label htmlFor='query'>
                     <input
                         type='text'
                         name='query'
-                        placeholder='Ale, Lager, Stout...'
+                        placeholder='Search Beers: Ale, Lager, Stout...'
                         required
                     />
                 </label>
-                <input type='submit'/>
+                <button type='submit'/>
             </form>
         )
     }

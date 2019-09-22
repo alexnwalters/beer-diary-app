@@ -1,0 +1,17 @@
+.overall_rating {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.color_cap {
+    background: url('../../utils/images/bottle-cap-color-32.png');
+    width: 32px;
+    height: 32px;
+}
+
+.blank_cap {
+    background: url('../../utils/images/bottle-cap-blank-16.png') no-repeat center;
+    width: 32px;
+    height: 32px;
+}

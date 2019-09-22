@@ -1,0 +1,35 @@
+.color_rating {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.beer_color_1 {
+    background: url('../../utils/images/beer-pale-32.png');
+    width: 32px;
+    height: 32px;
+}
+
+.beer_color_2 {
+    background: url('../../utils/images/beer-pils-32.png');
+    width: 32px;
+    height: 32px;
+}
+
+.beer_color_3 {
+    background: url('../../utils/images/beer-golden-32.png');
+    width: 32px;
+    height: 32px;
+}
+
+.beer_color_4 {
+    background: url('../../utils/images/beer-porter-32.png');
+    width: 32px;
+    height: 32px;
+}
+
+.beer_color_5 {
+    background: url('../../utils/images/beer-stout-32.png');
+    width: 32px;
+    height: 32px;
+}

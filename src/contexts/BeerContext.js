@@ -27,7 +27,7 @@ export class BeerProvider extends Component {
         beerResults: [],
         beers: [],
         userReviews: [],
-        error: null
+        error: null,
     };
 
     setQuery = (query) => {

@@ -55,7 +55,7 @@ class BeerInfoPage extends Component {
         const { error } = this.context
 
         return(
-            <div>
+            <div className='container'>
                 {error
                     ? <p>error!</p>
                     : this.renderBeerInfo()}

@@ -14,8 +14,8 @@ import BeerContext from '../../contexts/BeerContext'
     static contextType = BeerContext
 
     renderBeerInfo() {
-        const selectedBeer = this.props.match.params.beerId
-        const beerInfo = this.context.beerResults.filter(beer => beer.id === selectedBeer)
+        const selectedBeer = this.props.match.params.beer_id
+        const beerInfo = this.context.beerResults.filter(beer => beer.id == selectedBeer)
         
         return beerInfo.map(beer => 
             <BeerItem
