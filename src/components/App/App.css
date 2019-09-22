@@ -2,26 +2,55 @@
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
-  max-width: 960px;
+}
+
+.fjallaOne {
+  font-family: FjallaOne;
+}
+
+.raleway_med {
+  font-family: Raleway-Medium;
+}
+
+.raleway_lgt {
+  font-family: Raleway-Light;
+}
+
+.nothing {
+  font-family: NothingYouCouldDo-Regular;
+}
+
+.montserrat {
+  font-family: Montserrat-Bold;
+}
+
+.montserrat_med {
+  font-family: Montserrat-Medium;
 }
 
 input, select, textarea {
   font-size: 16px;
 }
 
-.App-search {
-    margin-top: 40px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 0px;
-    background-color: white;
-
+.App_header {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
 }
 
-.App-main {
-  margin-top: 80px;
+.App_search {
+  margin-top: 60px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+}
+
+.App_main {
+  margin-top: 100px;
   padding: 0px 10px;
 }
 

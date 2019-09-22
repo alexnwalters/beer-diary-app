@@ -7,6 +7,9 @@ class LoginForm extends Component {
 
     static defaultProps = {
         onLoginSuccess: () =>{},
+        history: {
+            goBack: () => {}
+        }
     }
 
     state = { error: null }
@@ -39,14 +42,15 @@ class LoginForm extends Component {
                 <div role='alert'>
                     {error && <p className='red'>{ error }</p>}
                 </div>
-                <fieldset>
+                <fieldset className='LoginForm_label raleway_med'>                    
                     <label htmlFor='user_name'>Username:</label>
                         <input type='text' name='user_name' required />
                     
                     <label htmlFor='password'>Password:</label>
                         <input type='password' name='password' required />
                     
-                    <input type='submit'/>
+                    <button className='LoginForm_button' type='submit'>Log In</button>
+                    <button className='LoginForm_button' onClick={this.props.history.goBack}>Back</button>
                 </fieldset>
             </form>
         )

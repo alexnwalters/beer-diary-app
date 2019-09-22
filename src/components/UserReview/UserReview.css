@@ -4,6 +4,8 @@
 }
 
 .UserReview p {
+    font-family: Montserrat-Regular;
+    font-variant-caps: all-small-caps;
     font-size: 14px;
     margin: 0px;
 }
@@ -40,5 +42,5 @@
 }
 
 .UserReview_aroma, .UserReview_taste {
-    font-size: 16px;
+    font-size: 20px;
 }

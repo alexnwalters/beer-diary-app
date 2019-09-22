@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.24",
+    "@fortawesome/free-solid-svg-icons": "^5.11.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "dotenv": "^8.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -11,7 +14,7 @@
     "react-scripts": "3.1.1",
     "uuid": "^3.3.3"
   },
-    "scripts": {
+  "scripts": {
     "start": "react-scripts start",
     "prebuild": "react-scripts test",
     "build": "react-scripts build",

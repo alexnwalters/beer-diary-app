@@ -1,0 +1,28 @@
+.LandingPage h1 {
+    font-size: 42px;
+}
+
+.LandingPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 55vh;
+}
+
+.signUp_button {
+    align-self: center;
+    background: transparent;
+    padding: 10px;
+    font-size: 28px;
+    transition: all .5s ease;
+    color:#41403E;
+    letter-spacing: 1px;
+    outline: none;
+    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.3);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: solid 2px #41403E;
+}
+
+.signUp_button:hover {
+    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+  }

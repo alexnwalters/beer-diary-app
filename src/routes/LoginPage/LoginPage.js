@@ -7,23 +7,23 @@ class LoginPage extends Component {
         history: {
             push: () => {},
         },
+        checkForLogin: () => {}
     }
 
     handleLoginSuccess = () => {
         const { location, history } = this.props
         const destination = (location.state || {}).from || '/diary'
         history.push(destination)
+        this.props.checkForLogin()
     }
 
 
     render() {
         return(
-            <div className='LoginPage'>
-                <h2>Log In</h2>
+            <div className='LoginPage container'>
                 <LoginForm
                     onLoginSuccess={this.handleLoginSuccess}
                 />
-                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

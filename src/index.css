@@ -1,6 +1,44 @@
-body {
+* {
   margin: 0;
-  padding: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+  max-width: 960px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'FjallaOne';
+  src: local('FjallaOne'), url(./utils/fonts/FjallaOne-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway-Light';
+  src: local('Raleway-Light'), url(./utils/fonts/Raleway-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway-Medium';
+  src: local('Raleway-Medium'), url(./utils/fonts/Raleway-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'NothingYouCouldDo-Regular';
+  src: local('NothingYouCouldDo'), url(./utils/fonts/NothingYouCouldDo-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: local('Montserrat-Bold'), url(./utils/fonts/Montserrat-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: local('Montserrat-Regular'), url(./utils/fonts/Montserrat-Regular.ttf) format('truetype');
 }

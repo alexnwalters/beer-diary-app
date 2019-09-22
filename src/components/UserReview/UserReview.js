@@ -16,11 +16,11 @@ export default function UserReview(props) {
                     <div className='UserReview_selection'>
                         <div>
                             <p>Aroma</p>
-                            <div className='UserReview_aroma'>{props.aroma}</div>
+                            <div className='UserReview_aroma nothing'>{props.aroma}</div>
                         </div>
                         <div >
                             <p>Taste</p>
-                            <div className='UserReview_taste'>{props.taste}</div>
+                            <div className='UserReview_taste nothing'>{props.taste}</div>
                         </div>
                     </div>
                     <ul className='UserReview_range'>
@@ -38,7 +38,7 @@ export default function UserReview(props) {
                         </li>
                         <li>
                             <p>Notes</p>
-                            <div className='UserReview_notes UserReview_results'>{props.notes || '...'}</div>
+                            <div className='UserReview_notes UserReview_results raleway_lgt'>{props.notes || '...'}</div>
                         </li>
                     </ul>
                     <Link to={`/update/${props.id}`}>

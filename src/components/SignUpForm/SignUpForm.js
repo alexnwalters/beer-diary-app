@@ -4,7 +4,10 @@ import './SignUpForm.css';
 
 class SignUpForm extends Component {
     static defaultProps = {
-        onSignUpSuccess: () => {}
+        onSignUpSuccess: () => {},
+        history: {
+            goback: () => {}
+        }
     }
         
     state = { error: null }
@@ -37,7 +40,7 @@ class SignUpForm extends Component {
                 <div role='alert'>
                     {error && <p className='red'>{error}</p>}
                 </div>
-                <fieldset>
+                <fieldset className='SignUpForm_label raleway_med'>
                     <label htmlFor='full_name'>Full Name:</label>
                         <input type='text' name='full_name' required/>
                     
@@ -46,11 +49,9 @@ class SignUpForm extends Component {
                     
                     <label htmlFor='password'>Password:</label>
                         <input type='password' name='password' required/>
-                    <div>   
-                        <input type='checkbox' required /> I confirm that I'm over the age of 21.
-                    </div>  
-                    <input type='submit'/>
-                    
+                         
+                    <button className='SignUpForm_button' type='submit'>Sign Up</button>
+                    <button className='SignUpForm_button' onClick={this.props.history.goBack}>Back</button>
                 </fieldset>
             </form>
         )

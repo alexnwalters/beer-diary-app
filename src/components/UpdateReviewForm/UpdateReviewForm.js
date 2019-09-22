@@ -75,7 +75,9 @@ import './UpdateReviewForm.css'
             })
             .catch(res => {
                 this.setState({ error: res.error })
-            })        
+            })
+            
+        this.props.history.push('/dairy')
     }
 
     componentDidMount() {

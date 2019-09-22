@@ -14,19 +14,35 @@ import DiaryPage from '../../routes/DiaryPage/DiaryPage';
 import ReviewInputPage from '../../routes/ReviewInputPage/ReviewInputPage'
 import UpdateReviewPage from '../../routes/UpdateReviewPage/UpdateReviewPage'
 import CreateBeerPage from '../../routes/CreateBeerPage/CreateBeerPage'
+import TokenService from '../../services/TokenService';
+import BeerContext from '../../contexts/BeerContext';
 
 class App extends Component {
+  static contextType = BeerContext
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      hasLogin: TokenService.hasAuthToken(),
+    }
+  }
+
+  checkForLogin = () => {
+    this.setState({
+      hasLogin: TokenService.hasAuthToken()
+    })
+  }
 
   render() {
     return (
       <div className='App'>
-        <header className='App-header'>
-          <Header />
+        <header className='App_header'>
+          <Header checkForLogin={this.checkForLogin} hasLogin={this.state.hasLogin}/>
         </header>
-        <section className='App-search'>
+        <section className='App_search'>
           <Search />
         </section>
-        <main className='App-main'>
+        <main className='App_main'>
           <Switch>
             <Route
               exact
@@ -37,9 +53,9 @@ class App extends Component {
               path={'/signup'}
               component={SignUpPage}
             />
-            <PublicOnlyRoute
+            <Route
               path={'/login'}
-              component={LoginPage}
+              render={(props) => <LoginPage {...props} checkForLogin={this.checkForLogin}/>}
             />
             <Route
               path={'/search'}

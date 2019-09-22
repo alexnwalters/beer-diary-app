@@ -15,12 +15,10 @@ class SignUpPage extends Component {
 
     render() {
         return (
-            <div>
-                <h2>User Sign Up</h2>
+            <div className='container'>
                 <SignUpForm 
                     onSignUpSuccess={this.handleSignUpSuccess}
                 /> 
-                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }
