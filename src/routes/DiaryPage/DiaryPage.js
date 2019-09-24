@@ -29,7 +29,7 @@ class DiaryPage extends Component {
                         const beer = beers.filter(beer => beer.beer_id === review.beer.beer_id)
                         
                         return (
-                            <div className='container'>
+                            <div key={review.id} className='container'>
                                 {beer.map(beer => 
                                     <BeerItem
                                         key={beer.id}
@@ -38,7 +38,6 @@ class DiaryPage extends Component {
                                 )}
                                 
                                 <UserReview
-                                    key={review.id}
                                     {...review}
                                 />
                             </div>

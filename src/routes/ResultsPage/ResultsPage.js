@@ -13,27 +13,31 @@ class ResultsPage extends Component {
         const { beerResults, userReviews } = this.context
 
         return (
-            <ul>
+            <div>
                 {beerResults.map((beer, i) => {
                     const review = userReviews.filter(review => review.beer.beer_id === beer.id)
 
                     if(review.length) {
                         return (
-                            <li className='container'>
-                                <BeerItem key={i} {...beer}/>
+                            <div key={i} className='container'>
+                                <BeerItem {...beer}/>
                                 <p>Already Reviewed</p>
-                            </li>
+                            </div>
                         )
                     } else {
                         return (
-                            <li className='container'>
-                                <BeerItem key={i} {...beer}/>
-                                <ReviewButton key={beer.id} {...beer}/>
-                            </li>
+                            <div key={i} className='container'>
+                                <BeerItem {...beer}/>
+                                <ReviewButton {...beer}/>
+                            </div>
                         )
                     }
                 })}
-            </ul>
+                <div>
+                    <p>End of Search Results.</p>
+                    <Link to='/create'><button>Create a Beer</button></Link>
+                </div>
+            </div>
         )
     }
 

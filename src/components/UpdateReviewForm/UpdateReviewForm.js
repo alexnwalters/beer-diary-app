@@ -14,16 +14,27 @@ import './UpdateReviewForm.css'
     }
     
     static contextType = BeerContext
-
-    state = {
-        error: null,
-        overall: '',
-        color: '',
-        aroma: '',
-        taste: '',
-        drinkability: '',
-        notes: '',
-        date_modified: new Date(),
+    
+    constructor(props){
+        super(props);
+        this.state = {
+            error: null,
+            overall: '',
+            color: '',
+            aroma: '',
+            taste: '',
+            drinkability: '',
+            notes: '',
+            date_modified: new Date(),
+            currentReview: {
+                overall: '',
+                color: '',
+                aroma: '',
+                taste: '',
+                drinkability: '',
+                notes: '',
+            }
+        };
     }
 
     handleChangeOverall = e => {
@@ -83,7 +94,8 @@ import './UpdateReviewForm.css'
     componentDidMount() {
         this.context.clearError()
         const selectedReview = this.props.match.params.review_id
-        const currentReview = this.context.userReviews.find(review => review.id == selectedReview)
+        this.setState({ currentReview: this.context.userReviews.find(review => review.id == selectedReview) })
+        const  { currentReview } = this.state
         
         this.setState({
             overall: currentReview.overall,
@@ -118,13 +130,13 @@ import './UpdateReviewForm.css'
                          <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
                             <select name='aroma' value={ aroma } onChange={ this.handleChangeAroma } required>
                                 <option disabled='' value=''>...</option>
-                                {aromas.map(aroma => <option value={aroma.name}>{aroma.name}</option>)}
+                                {aromas.map(aroma => <option key={aroma.name} value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         
                          <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
                             <select name='taste' value={ taste } onChange={ this.handleChangeTaste } required>
                                 <option disabled='' value=''>...</option>
-                                {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
+                                {tastes.map(taste => <option key={taste.name} value={taste.name}>{taste.name}</option>)}
                             </select>
                         
                          <label htmlFor='drinkability'>Drinkability:</label>

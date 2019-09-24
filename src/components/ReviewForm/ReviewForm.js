@@ -107,13 +107,13 @@ import './ReviewForm.css';
                          <label htmlFor='aroma'>Aroma (Most Domanant Fragrance):</label>
                             <select name='aroma' value={ aroma } onChange={ this.handleChangeAroma } required>
                                 <option disabled='' value=''>...</option>
-                                {aromas.map(aroma => <option value={aroma.name}>{aroma.name}</option>)}
+                                {aromas.map(aroma => <option key={aroma.name} value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         
                          <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
                             <select name='taste' value={ taste } onChange={ this.handleChangeTaste } required>
                                 <option disabled='' value=''>...</option>
-                                {tastes.map(taste => <option value={taste.name}>{taste.name}</option>)}
+                                {tastes.map(taste => <option key={taste.name} value={taste.name}>{taste.name}</option>)}
                             </select>
                         
                          <label htmlFor='drinkability'>Drinkability:</label>

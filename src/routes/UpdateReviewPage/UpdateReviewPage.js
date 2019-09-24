@@ -43,6 +43,7 @@ import BeerContext from '../../contexts/BeerContext'
                     : this.renderBeerInfo()}
                 </div>
                 <UpdateReviewForm
+                    key={this.props.match.params.review_id}
                     onUpdateSuccess={this.handleUpdateSuccess}
                 />
                 <button onClick={this.props.history.goBack}>Back</button>

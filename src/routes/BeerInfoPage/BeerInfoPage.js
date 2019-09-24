@@ -17,9 +17,6 @@ class BeerInfoPage extends Component {
         const beerInfoFromReview = this.context.userReviews.filter(review => review.beer.beer_id == selectedBeerId)
         const userReviews = this.context.userReviews
 
-        console.log(beerInfoFromResults)
-        console.log(selectedBeerId)
-        console.log(beerInfoFromReview)
         if(beerInfoFromResults.length) {
             return beerInfoFromResults.map(beer => {
                 const review = userReviews.find(review => review.beer.beer_id === beer.id)

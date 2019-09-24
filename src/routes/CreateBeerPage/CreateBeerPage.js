@@ -4,6 +4,7 @@ import BeerContext from '../../contexts/BeerContext'
 
  class CreateBeerPage extends Component {
     static defaultProps = {
+        match: { params: {} },
         history: {
             push: () => {},
         },
