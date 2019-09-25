@@ -2,25 +2,44 @@
     font-size: 42px;
 }
 
+.LandingPage h2 {
+    font-size: 24px;
+}
+
 .LandingPage {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 55vh;
+    height: 65vh;
+}
+
+.LandingPage_description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60%;
+    padding: 6px;
+    margin-bottom: 10px;
+    background: rgba(252, 249, 234, .8);
+    border: 2px solid #f8a978;
+    border-radius: 25px;
+    -webkit-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.5);
 }
 
 .signUp_button {
+    margin-top: 20px;
     align-self: center;
-    background: transparent;
+    background: #badfdb;
     padding: 10px;
     font-size: 28px;
-    transition: all .5s ease;
-    color:#41403E;
+    color:black;
     letter-spacing: 1px;
     outline: none;
     box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.3);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    border: solid 2px #41403E;
+    border: solid 2px rgb(0, 0, 0);
 }
 
 .signUp_button:hover {

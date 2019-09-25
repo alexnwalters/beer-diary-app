@@ -18,7 +18,8 @@ class SignUpPage extends Component {
             <div className='container'>
                 <SignUpForm 
                     onSignUpSuccess={this.handleSignUpSuccess}
-                /> 
+                />
+                <button className='SignUpForm_button' onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

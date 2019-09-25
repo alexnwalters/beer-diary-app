@@ -21,7 +21,7 @@ export default {
             "name": "IPA with Rosemary",
             "brewery": "SweetWater Brewing Company",
             "abv": 6.3,
-            // "ibu": null,
+            "ibu": null,
             "description": "American-style India pale ales are perceived to have medium-high to intense hop bitterness, flavor and aroma with medium-high alcohol content."
         },
     ],

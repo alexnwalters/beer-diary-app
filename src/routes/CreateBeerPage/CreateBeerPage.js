@@ -12,6 +12,9 @@ import BeerContext from '../../contexts/BeerContext'
 
     static contextType = BeerContext
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
     
     handleCreateSuccess = createReview => {
         const { history } = this.props
@@ -21,12 +24,12 @@ import BeerContext from '../../contexts/BeerContext'
     
     render() {         
         return (
-            <div>
+            <div className='container'>
                 <h2>Add Your New Beer and Review:</h2>
                 <CreateBeerForm 
                     onCreateSuccess={this.handleCreateSuccess}
                 />
-                <button onClick={this.props.history.goBack}>Back</button>
+                <button className='CreateForm_button' onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

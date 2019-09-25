@@ -8,17 +8,30 @@ class Search extends Component {
 
     static contextType = BeerContext
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            query: ''
+        }
+    }
+
+    handleChangeQuery = e => {
+        this.setState({ query: e.target.value })
+    };
+
     handleSubmit = e => {
         e.preventDefault()
         this.context.clearBeerResults()
         this.context.clearError()
 
-        const query = e.target.query.value
-        this.context.setQuery(query)
+        this.context.setQuery(this.state.query)
+        this.setState({ query: '' })
+
         this.props.history.push('/search')
     }
 
     render() {
+        const { query } = this.state
         return(
             <div className='Search_container'>
                 <form className='Search' onSubmit={this.handleSubmit}>
@@ -27,6 +40,8 @@ class Search extends Component {
                             type='text'
                             className='Search_query raleway_lgt'
                             name='query'
+                            value={ query }
+                            onChange={ this.handleChangeQuery}
                             placeholder='Search Beers: Ale, Lager, Stout...'
                             required
                         />

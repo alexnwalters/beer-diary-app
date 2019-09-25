@@ -70,6 +70,34 @@ const BeerDiaryApiService = {
             },
             body: JSON.stringify(newReview),
     })
+        .then(res =>{
+            if(!res.ok) {
+                throw new Error(res.status)
+            }
+        })
+    },
+    getReview(review_id) {
+        return fetch(`${config.API_ENDPOINT}/reviews/${review_id}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenServices.getAuthToken()}`
+            },
+    })
+        .then(res =>
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        )
+    },
+    getOtherUserReviews(beer_id) {
+        return fetch(`${config.API_ENDPOINT}/reviews/beers/${beer_id}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenServices.getAuthToken()}`
+            },
+    })
         .then(res =>
             (!res.ok)
                 ? res.json().then(e => Promise.reject(e))

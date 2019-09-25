@@ -7,6 +7,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(132deg, rgba(255,255,255,1) 25%, rgba(186,223,219,1) 58%);
+    border-radius: 4px;
+    -moz-box-shadow:0px 1px 0px 0px rgba(0,0,0,0.7);
+	-webkit-box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.7);
+	box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.7);
 }
 
 .BeerItem_logo {
@@ -18,6 +24,10 @@
     margin: 0px;
 }
 
+.BeerItem_title h3 {
+    font-size: 20px;
+}
+
 .BeerItem_title p {
     border-top: 1px solid gray;
 }
@@ -26,8 +36,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 70%;
     margin: auto;
+}
+
+.BeerItem_stats {
+    font-size: 28px;
 }
 
 .BeerItem_abv_ibu {

@@ -1,0 +1,48 @@
+.OtherReviews h3 {
+    font-size: 16px;
+    margin: 4px;
+}
+
+.OtherReviews p {
+    font-family: Montserrat-Regular;
+    font-variant-caps: all-small-caps;
+    font-size: 14px;
+    margin: 0px;
+}
+
+.OtherReviews_selection {
+    display: flex;
+    justify-content: space-evenly
+}
+
+.OtherReviews_selection div {
+    display: flex;
+}
+
+.OtherReviews_selection p {
+    margin: 0px 6px;
+}
+
+.OtherReviews_range {
+    margin: 0px;
+}
+.OtherReviews_range li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.OtherReviews_notes {
+    text-align: justify;
+    font-size: 12px;
+}
+
+.OtherReviews_results {
+    width: 75%;
+    margin-left: 10px;
+    margin-bottom: 4px;
+}
+
+.OtherReviews_aroma, .OtherReviews_taste {
+    font-size: 20px;
+}

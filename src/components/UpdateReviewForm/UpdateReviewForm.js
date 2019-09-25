@@ -18,22 +18,12 @@ import './UpdateReviewForm.css'
     constructor(props){
         super(props);
         this.state = {
-            error: null,
             overall: '',
             color: '',
             aroma: '',
             taste: '',
             drinkability: '',
             notes: '',
-            date_modified: new Date(),
-            currentReview: {
-                overall: '',
-                color: '',
-                aroma: '',
-                taste: '',
-                drinkability: '',
-                notes: '',
-            }
         };
     }
 
@@ -64,7 +54,7 @@ import './UpdateReviewForm.css'
     handleSubmit = e => {
         e.preventDefault()
         const review_id = this.props.match.params.review_id
-        const { overall, color, aroma, taste, drinkability, notes, date_modified } = this.state
+        const { overall, color, aroma, taste, drinkability, notes } = this.state
         const newReview = {
             overall: Math.round(overall),
             color: Math.round(color),
@@ -72,43 +62,34 @@ import './UpdateReviewForm.css'
             taste: taste,
             drinkability: Math.round(drinkability),
             notes: notes,
-            date_modified: date_modified
+            date_modified: new Date(),
         }
         
         BeerDiaryApiService.updateReview(newReview, review_id)
-            .then(res => {
-                overall.value = ''
-                color.value = ''
-                aroma.value = ''
-                taste.value = ''
-                drinkability.value = ''
-                notes.value = ''
-            })
-            .catch(res => {
-                this.setState({ error: res.error })
-            })
-            
-        this.props.history.push('/dairy')
+        .then(() => {
+            this.props.onUpdateSuccess()
+        })
+        .catch(this.context.setError)
     }
 
     componentDidMount() {
         this.context.clearError()
         const selectedReview = this.props.match.params.review_id
-        this.setState({ currentReview: this.context.userReviews.find(review => review.id == selectedReview) })
-        const  { currentReview } = this.state
-        
-        this.setState({
-            overall: currentReview.overall,
-            color: currentReview.color,
-            aroma: currentReview.aroma,
-            taste: currentReview.taste,
-            drinkability: currentReview.drinkability,
-            notes: currentReview.notes,
-        })
+        BeerDiaryApiService.getReview(selectedReview)
+            .then(res => this.setState({
+                overall: res.overall,
+                color: res.color,
+                aroma: res.aroma,
+                taste: res.taste,
+                drinkability: res.drinkability,
+                notes: res.notes,
+            }))
+            .catch(this.context.setError)
     }
 
     render() {
-        const { error, overall, color, aroma, taste, drinkability, notes } = this.state
+        const { error } = this.context
+        const { overall, color, aroma, taste, drinkability, notes } = this.state
         const aromas = [{name: 'Bready'}, {name: 'Nutty'}, {name: 'Toasty'}, {name: 'Roasted'}, {name: 'Floral'}, {name: 'Fruity'}, {name: 'Piney'}, {name: 'Spicy'}]
         const tastes = [{name: 'Crisp'}, {name: 'Hop'}, {name: 'Malt'}, {name: 'Roast'}, {name: 'Smoke'}, {name: 'Fruit & Spice'}, {name: 'Tart & Funky'}]
 
@@ -133,7 +114,7 @@ import './UpdateReviewForm.css'
                                 {aromas.map(aroma => <option key={aroma.name} value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         
-                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
+                         <label htmlFor='taste'>Taste (Most Domanant Flavor):</label>
                             <select name='taste' value={ taste } onChange={ this.handleChangeTaste } required>
                                 <option disabled='' value=''>...</option>
                                 {tastes.map(taste => <option key={taste.name} value={taste.name}>{taste.name}</option>)}
@@ -146,7 +127,7 @@ import './UpdateReviewForm.css'
                          <label htmlFor='notes'>Notes:</label>
                                 <textarea  name='notes' rows='4' value={ notes } onChange={ this.handleChangeNotes }></textarea>
                         <br></br>              
-                        <input type='submit'/>
+                        <input className='UpdateForm_button' type='submit'/>
                     </fieldset>
                 </form>
             </div>

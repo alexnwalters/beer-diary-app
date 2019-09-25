@@ -14,6 +14,10 @@ import BeerContext from '../../contexts/BeerContext'
 
     static contextType = BeerContext
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     renderBeerInfo() {
         const selectedReview = this.props.match.params.review_id
         const reviewBeerInfo = this.context.userReviews.filter(review => review.id == selectedReview)
@@ -36,17 +40,19 @@ import BeerContext from '../../contexts/BeerContext'
          
         return (
             <div>
-                <h2>Provide Your Review:</h2>
-                <div>
-                {error
-                    ? <p>error!</p>
-                    : this.renderBeerInfo()}
+                <h2 className='montserrat'>Provide Your Review:</h2>
+                <div className='container'>
+                    <div>
+                    {error
+                        ? <p>error!</p>
+                        : this.renderBeerInfo()}
+                    </div>
+                    <UpdateReviewForm
+                        key={this.props.match.params.review_id}
+                        onUpdateSuccess={this.handleUpdateSuccess}
+                    />
+                    <button className='UpdateForm_button' onClick={this.props.history.goBack}>Back</button>
                 </div>
-                <UpdateReviewForm
-                    key={this.props.match.params.review_id}
-                    onUpdateSuccess={this.handleUpdateSuccess}
-                />
-                <button onClick={this.props.history.goBack}>Back</button>
             </div>
         )
     }

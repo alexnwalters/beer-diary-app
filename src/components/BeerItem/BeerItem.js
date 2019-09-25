@@ -11,18 +11,24 @@ export default function BeerItem(props) {
                 <div className='BeerItem_link'>
                     <img className='BeerItem_logo' src={(props.breweries[0].images.icon !== null) ? props.breweries[0].images.icon : props.image || BeerImage } alt='beer' style={{width: 64, height: 64}}/>
                     <div className='BeerItem_title'>
-                        <h3>{props.name}</h3>
-                        <p>{props.brewery || props.breweries[0].name || 'Brewery Unknown'}</p>
+                        <h3 className='montserrat'>{props.name}</h3>
+                        <p className='raleway_med'>{props.brewery || props.breweries[0].name || 'Brewery Unknown'}</p>
                     </div>
                 </div>
             </Link>
            <div>
             <ul>
-                <li>{props.beer_style || props.style.shortName || ''}</li>
-                <li><span className='BeerItem_abv_ibu'>ABV</span> {props.abv || props.style.abvMax || '-'}</li>
-                <li><span className='BeerItem_abv_ibu'>IBU</span> {props.ibu || props.style.ibuMax || '-'}</li>
+                <li className='raleway_med'>{props.beer_style || props.style.shortName || ''}</li>
+                <li>
+                    <span className='BeerItem_abv_ibu raleway_med'>ABV </span>
+                    <span className='BeerItem_stats nothing'>{props.abv || props.style.abvMax || '-'}</span>
+                </li>
+                <li>
+                    <span className='BeerItem_abv_ibu raleway_med'>IBU  </span> 
+                    <span className='BeerItem_stats nothing'>{props.ibu || props.style.ibuMax || '-'}</span>
+                </li>
             </ul>
-            <p className='BeerItem_notes'>{props.description || ''}</p>
+            <p className='BeerItem_notes raleway_lgt'>{props.description || ''}</p>
             </div>
         </div>
     )

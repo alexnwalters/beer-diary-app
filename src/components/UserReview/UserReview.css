@@ -12,13 +12,15 @@
 
 .UserReview_selection {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly
 }
 
 .UserReview_selection div {
-    width: 40%;
     display: flex;
-    justify-content: space-between;
+}
+
+.UserReview_selection p {
+    margin: 0px 6px;
 }
 
 .UserReview_range {
@@ -43,4 +45,38 @@
 
 .UserReview_aroma, .UserReview_taste {
     font-size: 20px;
+}
+
+.UserReview_update {
+	-moz-box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.5);
+	background-color: #f8a978;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px 0px 0px 6px;
+	border: 1px solid #fc9b63;
+	cursor: pointer;
+	color: #ffffff;
+	padding: 4px 20px;
+	text-decoration: none;
+    text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
+    font-family: Montserrat-bold;
+}
+
+.UserReview_delete {
+	-moz-box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.5);
+	background-color: #f8a978;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 0px 6px 6px 0px;;
+	border: 1px solid #fc9b63;
+	cursor: pointer;
+	color: #ffffff;
+	padding: 4px 20px;
+	text-decoration: none;
+    text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
+    font-family: Montserrat-bold;
 }

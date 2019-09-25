@@ -6,7 +6,7 @@ export default function ReviewButton(props) {
     return (
         <div>
             <Link to={`/review/${props.id}`}>
-                <button>Review</button>
+                <button className='ReviewButton'>Review</button>
             </Link>
         </div>
     )    

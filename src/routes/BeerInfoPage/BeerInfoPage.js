@@ -3,13 +3,32 @@ import BeerItem from '../../components/BeerItem/BeerItem'
 import UserReview from '../../components/UserReview/UserReview';
 import BeerContext from '../../contexts/BeerContext'
 import ReviewButton from '../../components/ReviewButton/ReviewButton'
+import OtherReviews from '../../components/OtherReivews/OtherReviews'
+import BeerDiaryApiService from '../../services/BeerDiaryApiService'
 
 class BeerInfoPage extends Component {
     static defaultProps = {
         match: { params: {} },
     }
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            otherReviews: [],
+            otherError: null,
+        }
+      }
+
     static contextType = BeerContext
+
+    componentDidMount() {
+        this.context.clearError()
+        const beer_id = this.props.match.params.beer_id
+
+        BeerDiaryApiService.getOtherUserReviews(beer_id)
+            .then(res => this.setState({otherReviews: res}))
+            .catch(e => this.setState({otherError: e}))
+    }
 
     renderBeerInfo() {
         const selectedBeerId = this.props.match.params.beer_id
@@ -24,6 +43,7 @@ class BeerInfoPage extends Component {
                     return (
                         <div>
                             <BeerItem key={beer.id} {...beer}/>
+                            <p className='raleway_med'>Your Review</p>
                             <UserReview key={review.id} {...review}/>
                         </div>
                     )
@@ -41,6 +61,7 @@ class BeerInfoPage extends Component {
                 return (
                     <div>
                         <BeerItem key={review.beer.beer_id} {...review.beer}/>
+                        <p className='raleway_med'>Your Review</p>
                         <UserReview key={review.id} {...review}/>
                     </div>
                 )
@@ -48,14 +69,38 @@ class BeerInfoPage extends Component {
         }
     }
 
+    renderOtherUserReviews() {
+        const { otherReviews } = this.state
+
+        if(otherReviews.length) {
+            return (
+                <div> 
+                    <h3 className='montserrat'>Other User Reviews</h3>
+                    {otherReviews.map(review => {
+                        return (
+                            <div className='container'>
+                                <OtherReviews key={review.user_id} {...review}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        }
+    }
+
     render() {
         const { error } = this.context
-
+        const { otherError } = this.state
         return(
-            <div className='container'>
-                {error
-                    ? <p>error!</p>
-                    : this.renderBeerInfo()}
+            <div>
+                <div className='container'>
+                    {error
+                        ? <p>Error!</p>
+                        : this.renderBeerInfo()}
+                </div>
+                {otherError
+                    ? <p className='raleway_med'>No Other Reviews Exist</p>
+                    : this.renderOtherUserReviews()}
             </div>
         )
     }

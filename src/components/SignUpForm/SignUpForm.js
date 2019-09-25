@@ -51,7 +51,6 @@ class SignUpForm extends Component {
                         <input type='password' name='password' required/>
                          
                     <button className='SignUpForm_button' type='submit'>Sign Up</button>
-                    <button className='SignUpForm_button' onClick={this.props.history.goBack}>Back</button>
                 </fieldset>
             </form>
         )

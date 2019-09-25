@@ -4,6 +4,7 @@ import BeerItem from '../../components/BeerItem/BeerItem';
 import BeerContext from '../../contexts/BeerContext';
 import ReviewButton from '../../components/ReviewButton/ReviewButton';
 import Loading from '../../components/Loading/Loading';
+import './ResultsPage.css'
 
 class ResultsPage extends Component {
 
@@ -21,7 +22,7 @@ class ResultsPage extends Component {
                         return (
                             <div key={i} className='container'>
                                 <BeerItem {...beer}/>
-                                <p>Already Reviewed</p>
+                                <p className='raleway_med'>Already Reviewed</p>
                             </div>
                         )
                     } else {
@@ -34,8 +35,8 @@ class ResultsPage extends Component {
                     }
                 })}
                 <div>
-                    <p>End of Search Results.</p>
-                    <Link to='/create'><button>Create a Beer</button></Link>
+                    <p className='raleway_med'>End of Search Results.</p>
+                    <Link to='/create'><button className='ResultsPage_create'>Create a Beer</button></Link>
                 </div>
             </div>
         )
@@ -47,13 +48,13 @@ class ResultsPage extends Component {
         
         return(
             <div>
-                <h2>Results:</h2>
+                <h2 className='montserrat'>Results:</h2>
                 {(resultsReturned.length || error )
                     ? <div> 
                         {error
                             ? <div>
-                                <p>No results returned, please try again or add a beer instead.</p>
-                                <Link to='/create'><button>Create a Beer</button></Link>
+                                <p className='raleway_med'>No results returned, please try again or add a beer instead.</p>
+                                <Link to='/create'><button className='ResultsPage_create'>Create a Beer</button></Link>
                             </div>
                             : this.renderBeers()}
                     </div>

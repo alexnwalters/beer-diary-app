@@ -24,7 +24,9 @@ class LoginPage extends Component {
                 <LoginForm
                     onLoginSuccess={this.handleLoginSuccess}
                 />
+                <button className='LoginForm_button' onClick={this.props.history.goBack}>Back</button>
             </div>
+
         )
     }
 }

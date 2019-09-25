@@ -17,9 +17,6 @@ library.add(
 fas //search icon
 )
 
-
-
-
 ReactDOM.render(
     <BrowserRouter>
         <BeerProvider>

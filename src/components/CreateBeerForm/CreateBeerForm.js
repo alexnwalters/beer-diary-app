@@ -132,7 +132,7 @@ class CreateBeerForm extends Component{
                                 {aromas.map(aroma => <option key={aroma.name} value={aroma.name}>{aroma.name}</option>)}
                             </select>
                         
-                         <label htmlFor='taste'>Taste (Most Domanant Flavor Palate):</label>
+                         <label htmlFor='taste'>Taste (Most Domanant Flavor):</label>
                             <select name='taste' value={ taste } onChange={ this.handleChangeTaste } required>
                                 <option disabled='' value=''>...</option>
                                 {tastes.map(taste => <option key={taste.name} value={taste.name}>{taste.name}</option>)}
@@ -145,7 +145,7 @@ class CreateBeerForm extends Component{
                          <label htmlFor='notes'>Notes:</label>
                                 <textarea  name='notes' rows='4' value={ notes } onChange={ this.handleChangeNotes }></textarea>
                         <br></br>              
-                        <input type='submit'/>
+                        <input className='CreateForm_button' type='submit'/>
                     </fieldset>
                 </form>
             </div>

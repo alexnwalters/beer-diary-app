@@ -12,7 +12,6 @@ export default function UserReview(props) {
         <BeerContext.Consumer>
             {(context) => (
                 <div className='UserReview'>
-                    <h3>Your Review</h3>
                     <div className='UserReview_selection'>
                         <div>
                             <p>Aroma</p>
@@ -42,9 +41,9 @@ export default function UserReview(props) {
                         </li>
                     </ul>
                     <Link to={`/update/${props.id}`}>
-                        <button>Update</button>
+                        <button className='UserReview_update'>Update</button>
                     </Link>
-                    <button onClick={() => BeerDiaryApiService.deleteReview(props.id, context.deleteUserReview)}>Delete</button>                    
+                    <button className ='UserReview_delete' onClick={() => BeerDiaryApiService.deleteReview(props.id, context.deleteUserReview)}>Delete</button>                    
                 </div>
             )}
         </BeerContext.Consumer>

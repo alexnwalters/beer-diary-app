@@ -1,3 +1,7 @@
+.Header {
+    background-color:#badfdb;
+}
+
 .Header_Private, .Header_Public {
     display: flex;
     justify-content: space-between;

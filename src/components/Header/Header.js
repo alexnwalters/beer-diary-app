@@ -16,7 +16,7 @@ class Header extends Component {
 	renderPublicLinks() {
 		return (
 			<div className='Header_Public montserrat'>
-				<Link to='/'>Beer Diary,</Link>
+				<Link to='/'>Beer Diary</Link>
 				<Link to='/login'>Log In</Link>
 				<Link to='/signup'>Sign Up</Link>
 			</div>
@@ -26,7 +26,7 @@ class Header extends Component {
 	renderPrivateLinks() {
 		return (
 			<div className='Header_Private montserrat'>
-				<Link to='/diary'>Beer Diary,</Link>
+				<Link to='/diary'>Beer Diary</Link>
 				<Link onClick={this.handleLogout} to='/'>Logout</Link>
 			</div>
 		)
