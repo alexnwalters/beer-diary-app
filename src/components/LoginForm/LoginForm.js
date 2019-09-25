@@ -7,9 +7,6 @@ class LoginForm extends Component {
 
     static defaultProps = {
         onLoginSuccess: () =>{},
-        history: {
-            goBack: () => {}
-        }
     }
 
     state = { error: null }

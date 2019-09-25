@@ -5,9 +5,6 @@ import './SignUpForm.css';
 class SignUpForm extends Component {
     static defaultProps = {
         onSignUpSuccess: () => {},
-        history: {
-            goback: () => {}
-        }
     }
         
     state = { error: null }

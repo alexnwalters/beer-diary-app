@@ -6,6 +6,7 @@ class LoginPage extends Component {
         location: {},
         history: {
             push: () => {},
+            goBack: () => {},
         },
         checkForLogin: () => {}
     }

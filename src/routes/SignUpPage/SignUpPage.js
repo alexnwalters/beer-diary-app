@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import SignUpForm from '../../components/SignUpForm/SignUpForm'
 
 class SignUpPage extends Component {
-    static defualtProps = {
+    static defaultProps = {
         history: {
             push: () => {},
+            goBack: () => {},
         },
     }
 
