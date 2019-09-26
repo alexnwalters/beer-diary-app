@@ -56,6 +56,10 @@ p {
   word-wrap: break-word;
 }
 
+.red {
+  color: red;
+}
+
 .container {
   padding: 10px;
   margin-bottom: 12px;

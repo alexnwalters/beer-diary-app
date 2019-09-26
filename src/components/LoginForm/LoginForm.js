@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TokenService from '../../services/TokenService';
 import AuthApiService from '../../services/AuthApiService';
 import './LoginForm.css';
+import Loading from '../Loading/Loading';
  
 class LoginForm extends Component {
 
@@ -9,11 +10,18 @@ class LoginForm extends Component {
         onLoginSuccess: () =>{},
     }
 
-    state = { error: null }
+    state = { 
+        error: null,
+        loading: null,
+    }
 
     handleSubmitJwtAuth = e => {
         e.preventDefault()
-        this.setState({ error: null })
+        this.setState({ 
+            error: null,
+            loading: true,
+        })
+
         const { user_name, password } = e.target
 
         AuthApiService.postLogin({
@@ -28,11 +36,12 @@ class LoginForm extends Component {
             })
             .catch(res => {
                 this.setState({ error: res.error })
+                this.setState({ loading: false })
             })
     }
 
     render() {
-        const { error } = this.state
+        const { error, loading } = this.state
 
         return(
             <form className='LoginForm' onSubmit={this.handleSubmitJwtAuth}>
@@ -45,8 +54,12 @@ class LoginForm extends Component {
                     
                     <label htmlFor='password'>Password:</label>
                         <input type='password' name='password' required />
-                    
-                    <button className='LoginForm_button' type='submit'>Log In</button>
+
+                    <button className='LoginForm_button' type='submit'>
+                        {(!loading)
+                            ? 'Log In'
+                            : <Loading />}
+                    </button>
                 </fieldset>
             </form>
         )

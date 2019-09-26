@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
-import Search from '../Search/Search';
 import PrivateRoute from '../../utils/PrivateRoute';
 import PublicOnlyRoute from '../../utils/PublicOnlyRoute';
 import LandingPage from '../../routes/LandingPage/LandingPage'
