@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import BeerImage from '../../utils/images/beer.png'
+import BeerImage from '../../utils/images/beer-256.png'
 import './BeerItem.css'
 
 export default function BeerItem(props) {

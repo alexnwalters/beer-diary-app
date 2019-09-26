@@ -1,5 +1,6 @@
 .LandingPage h1 {
     font-size: 42px;
+    margin-bottom: 10px
 }
 
 .LandingPage h2 {
@@ -10,14 +11,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 65vh;
+    min-height: 65vh;
 }
 
 .LandingPage_description {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 60%;
+    min-height: 30vh;
     padding: 6px;
     margin-bottom: 10px;
     background: rgba(252, 249, 234, .8);
@@ -26,6 +27,10 @@
     -webkit-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.5);
     box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.5);
+}
+
+.LandingPage_description p {
+    margin-top: 10px;
 }
 
 .signUp_button {

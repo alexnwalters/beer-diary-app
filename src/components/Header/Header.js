@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TokenService from '../../services/TokenService'
+import Search from '../Search/Search'
 import './Header.css'
 
 class Header extends Component {
@@ -15,19 +16,29 @@ class Header extends Component {
 
 	renderPublicLinks() {
 		return (
-			<div className='Header_Public montserrat'>
-				<Link to='/'>Beer Diary</Link>
-				<Link to='/login'>Log In</Link>
-				<Link to='/signup'>Sign Up</Link>
+			<div>
+				<div className='Header_Public montserrat'>
+					<Link to='/'>Beer Diary</Link>
+					<Link to='/'><img className='Header_logo' src={ require('../../utils/images/beer-pils-32.png') }/></Link>
+					<div>
+						<Link className='Header_Public_left' to='/login'>Log In</Link>
+						<Link className='Header_Public_right' to='/signup'>Sign Up</Link>
+					</div>
+				</div>
+				<Search />
 			</div>
 		)
 	}
 
 	renderPrivateLinks() {
 		return (
-			<div className='Header_Private montserrat'>
-				<Link to='/diary'>Beer Diary</Link>
-				<Link onClick={this.handleLogout} to='/'>Logout</Link>
+			<div>
+				<div className='Header_Private montserrat'>
+					<Link to='/diary'>Beer Diary</Link>
+					<Link to='/diary'><img className='Header_logo' src={ require('../../utils/images/beer-pils-32.png') }/></Link>
+					<Link onClick={this.handleLogout} to='/'>Logout</Link>
+				</div>
+				<Search />
 			</div>
 		)
 	}

@@ -42,18 +42,8 @@ input, select, textarea {
   background: white;
 }
 
-.App_search {
-  margin-top: 60px;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: white;
-  border-bottom: solid 2px rgb(0, 0, 0);
-}
-
 .App_main {
-  margin-top: 100px;
+  margin-top: 90px;
   padding: 0px 10px;
 }
 

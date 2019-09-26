@@ -30,7 +30,7 @@ class BeerInfoPage extends Component {
             .catch(e => this.setState({otherError: e}))
     }
 
-    renderBeerInfo() {
+    renderBeerInfo() { //checks for beer info from new search results if or needs the use info from user review
         const selectedBeerId = this.props.match.params.beer_id
         const beerInfoFromResults = this.context.beerResults.filter(beer => beer.id === selectedBeerId)
         const beerInfoFromReview = this.context.userReviews.filter(review => review.beer.beer_id == selectedBeerId)

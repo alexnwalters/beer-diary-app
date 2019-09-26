@@ -39,9 +39,6 @@ class App extends Component {
         <header className='App_header'>
           <Header checkForLogin={this.checkForLogin} hasLogin={this.state.hasLogin}/>
         </header>
-        <section className='App_search'>
-          <Search />
-        </section>
         <main className='App_main'>
           <Switch>
             <Route
